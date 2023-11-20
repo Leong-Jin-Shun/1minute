@@ -19,7 +19,7 @@ struct ContentView: View {
             BackgroundView().environmentObject(leafVar)
             
             if (transparency != 1.0) {
-                Image("Rock Plate").resizable().scaledToFit().offset(y: CGFloat(-200.0 * titleVar)).scaleEffect(1.0 - 0.1 * titleVar)
+                Image("Rock Plate").resizable().scaledToFit().offset(y: CGFloat(-200.0 * titleVar)).scaleEffect(1.0 - 0.1 * titleVar).shadow(radius: 5)
                 
                 TitleView().offset(y: CGFloat(-200.0 * titleVar)).scaleEffect(1.0 - 0.1 * titleVar).opacity(1.0 - titleVar)
             }
@@ -44,6 +44,12 @@ struct ContentView: View {
                 withAnimation() {
                     transparency = 1.0
                 }
+            }
+            
+            for _ in 1...10 {
+                moneyMatters.spending.append(420.69)
+                moneyMatters.goals.append(420.0)
+                moneyMatters.income.append(69.0)
             }
         }
     }

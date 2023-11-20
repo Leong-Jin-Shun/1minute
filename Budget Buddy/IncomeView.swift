@@ -1,5 +1,5 @@
 //
-//  HomeScreenView.swift
+//  IncomeView.swift
 //  Budget Buddy
 //
 //  Created by Christian Kaden Lim on 20/11/23.
@@ -7,38 +7,31 @@
 
 import SwiftUI
 
-class MoneyMatters: ObservableObject {
-    @Published var goals = [] as [Double]
-    @Published var income = [] as [Double]
-    @Published var spending = [] as [Double]
-}
-
-struct HomeScreenView: View {
-    
+struct IncomeView: View {
     @EnvironmentObject var moneyMatters: MoneyMatters
     
-    @State private var budget = 0.0
+    @State private var income = 0.0
     
     var body: some View {
         VStack {
             Spacer()
+                
+            Text("Total Income").font(.custom("Jurassic", size: 36))
             
             ZStack {
                 Image("Rock Plate").resizable().scaledToFit().scaleEffect(0.9).shadow(radius: 5)
                 
-                Text("$\(budget, specifier: "%.2f")").font(.custom("JungleFever", size: 36))
+                Text("$\(income, specifier: "%.2f")").font(.custom("JungleFever", size: 36))
             }.padding()
-            
-            Image("Plank").resizable().scaledToFit().padding()
             
             Spacer()
             
             ScrollView {
-                ForEach(0..<moneyMatters.spending.count, id: \.self) { i in
+                ForEach(0..<moneyMatters.income.count, id: \.self) { i in
                     ZStack {
                         Image("Plank").resizable().scaledToFit()
                         
-                        Text("You spent $\(moneyMatters.spending[i], specifier: "%.2f"), you pig")
+                        Text("You collected $\(moneyMatters.income[i], specifier: "%.2f"), well done")
                     }.scaleEffect(0.75).padding(-15)
                 }
             }
@@ -47,24 +40,24 @@ struct HomeScreenView: View {
             
             NavigationView().padding()
         }.onAppear() {
-            for i in moneyMatters.goals {
-                budget += moneyMatters.goals[Int(i)]
+            for i in moneyMatters.income {
+                income += moneyMatters.income[Int(i)]
             }
         }
     }
 }
 
-struct HomeScreenViewMinion: View {
+struct IncomeViewMinion: View {
     
     @StateObject var moneyMatters = MoneyMatters()
     
     var body: some View {
-        HomeScreenView().environmentObject(moneyMatters)
+        IncomeView().environmentObject(moneyMatters)
     }
 }
 
-struct HomeScreenView_Previews: PreviewProvider {
+struct IncomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreenViewMinion()
+        IncomeViewMinion()
     }
 }
