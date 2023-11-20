@@ -10,12 +10,13 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject var leafVar = LeafVar()
+    @State private var titleVar = 0
     
     var body: some View {
         ZStack {
             BackgroundView().environmentObject(leafVar)
             
-            TitleView()
+            TitleView().offset(y: CGFloat(-1 * titleVar))
         }.frame(maxWidth: .infinity, maxHeight: .infinity).background(Image("Ouch").resizable().scaledToFill()).ignoresSafeArea().onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation(.interpolatingSpring(stiffness: 225, damping: 15)) {
