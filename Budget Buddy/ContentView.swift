@@ -10,21 +10,39 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject var leafVar = LeafVar()
-    @State private var titleVar = 0
+    @StateObject var moneyMatters = MoneyMatters()
+    @State private var titleVar = 0.0
+    @State private var transparency = 0.0
     
     var body: some View {
         ZStack {
             BackgroundView().environmentObject(leafVar)
             
-            TitleView().offset(y: CGFloat(-1 * titleVar))
-        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(Image("Ouch").resizable().scaledToFill()).ignoresSafeArea().onAppear() {
+            if (transparency != 1.0) {
+                Image("Rock Plate").resizable().scaledToFit().offset(y: CGFloat(-200.0 * titleVar)).scaleEffect(1.0 - 0.1 * titleVar)
+                
+                TitleView().offset(y: CGFloat(-200.0 * titleVar)).scaleEffect(1.0 - 0.1 * titleVar).opacity(1.0 - titleVar)
+            }
+            
+            ZStack {
+                HomeScreenView().environmentObject(moneyMatters)
+            }.opacity(transparency)
+        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(Image("Sky").resizable().scaledToFill()).ignoresSafeArea().onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation(.interpolatingSpring(stiffness: 225, damping: 15)) {
                     leafVar.rotation = 1.0
                 }
-                
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.75) {
                 withAnimation() {
-                    leafVar.extrusion = 1.0
+                    titleVar = 1.0
+                }
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                withAnimation() {
+                    transparency = 1.0
                 }
             }
         }

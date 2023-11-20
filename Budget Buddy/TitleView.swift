@@ -10,8 +10,6 @@ import SwiftUI
 struct TitleView: View {
     var body: some View {
         ZStack {
-            Image("Rock Plate").resizable().scaledToFit()
-            
             VStack {
                 HStack {
                     Text("BUDGET").italic().fontWeight(.semibold).font(.system(size: 24)).offset(y: 10)
