@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D95CE5EA2B0B29A900B0DC25 /* Goal+Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95CE5E92B0B29A900B0DC25 /* Goal+Sample.swift */; };
+		D95CE5EC2B0B3F4D00B0DC25 /* GoalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95CE5EB2B0B3F4D00B0DC25 /* GoalDetailView.swift */; };
+		D95CE5EE2B0B455200B0DC25 /* NewGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95CE5ED2B0B455200B0DC25 /* NewGoalView.swift */; };
+		D9CA42D52B0AFF5D00B6009D /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CA42D42B0AFF5D00B6009D /* GoalsView.swift */; };
+		D9CA42D72B0AFFB000B6009D /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CA42D62B0AFFB000B6009D /* Goal.swift */; };
+		D9CA42DB2B0B07E800B6009D /* Forever in Frameworks */ = {isa = PBXBuildFile; productRef = D9CA42DA2B0B07E800B6009D /* Forever */; };
 		ED1D683E2B08546200FD825A /* Budget_BuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D683D2B08546200FD825A /* Budget_BuddyApp.swift */; };
 		ED1D68402B08546200FD825A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D683F2B08546200FD825A /* ContentView.swift */; };
 		ED1D68422B08546400FD825A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1D68412B08546400FD825A /* Assets.xcassets */; };
@@ -39,6 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D95CE5E92B0B29A900B0DC25 /* Goal+Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+Sample.swift"; sourceTree = "<group>"; };
+		D95CE5EB2B0B3F4D00B0DC25 /* GoalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailView.swift; sourceTree = "<group>"; };
+		D95CE5ED2B0B455200B0DC25 /* NewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
+		D9CA42D42B0AFF5D00B6009D /* GoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
+		D9CA42D62B0AFFB000B6009D /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		ED1D683A2B08546200FD825A /* Budget Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Budget Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED1D683D2B08546200FD825A /* Budget_BuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget_BuddyApp.swift; sourceTree = "<group>"; };
 		ED1D683F2B08546200FD825A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9CA42DB2B0B07E800B6009D /* Forever in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +93,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D9CA42D82B0B00C800B6009D /* Goals */ = {
+			isa = PBXGroup;
+			children = (
+				D9CA42D42B0AFF5D00B6009D /* GoalsView.swift */,
+				D95CE5ED2B0B455200B0DC25 /* NewGoalView.swift */,
+				D95CE5E92B0B29A900B0DC25 /* Goal+Sample.swift */,
+				D95CE5EB2B0B3F4D00B0DC25 /* GoalDetailView.swift */,
+				D9CA42D62B0AFFB000B6009D /* Goal.swift */,
+			);
+			path = Goals;
+			sourceTree = "<group>";
+		};
 		ED1D68312B08546200FD825A = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +134,7 @@
 				ED1D68672B08549B00FD825A /* TitleView.swift */,
 				ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */,
 				ED9AFAF52B0AF0BC00CD38C3 /* TrackingView.swift */,
+				D9CA42D82B0B00C800B6009D /* Goals */,
 				ED1D686B2B08612C00FD825A /* LeafView.swift */,
 				ED1D68412B08546400FD825A /* Assets.xcassets */,
 				ED1D68432B08546400FD825A /* Preview Content */,
@@ -158,6 +183,9 @@
 			dependencies = (
 			);
 			name = "Budget Buddy";
+			packageProductDependencies = (
+				D9CA42DA2B0B07E800B6009D /* Forever */,
+			);
 			productName = "Budget Buddy";
 			productReference = ED1D683A2B08546200FD825A /* Budget Buddy.app */;
 			productType = "com.apple.product-type.application";
@@ -230,6 +258,9 @@
 				Base,
 			);
 			mainGroup = ED1D68312B08546200FD825A;
+			packageReferences = (
+				D9CA42D92B0B07E800B6009D /* XCRemoteSwiftPackageReference "forever" */,
+			);
 			productRefGroup = ED1D683B2B08546200FD825A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -272,12 +303,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D95CE5EC2B0B3F4D00B0DC25 /* GoalDetailView.swift in Sources */,
+				D95CE5EA2B0B29A900B0DC25 /* Goal+Sample.swift in Sources */,
 				ED9AFAF42B0A00B100CD38C3 /* BackgroundView.swift in Sources */,
 				ED9AFAF62B0AF0BC00CD38C3 /* TrackingView.swift in Sources */,
+				D95CE5EE2B0B455200B0DC25 /* NewGoalView.swift in Sources */,
 				ED1D686C2B08612C00FD825A /* LeafView.swift in Sources */,
+				D9CA42D52B0AFF5D00B6009D /* GoalsView.swift in Sources */,
 				ED1D68402B08546200FD825A /* ContentView.swift in Sources */,
 				ED1D683E2B08546200FD825A /* Budget_BuddyApp.swift in Sources */,
 				ED9AFAF82B0AF60800CD38C3 /* HomeScreenView.swift in Sources */,
+				D9CA42D72B0AFFB000B6009D /* Goal.swift in Sources */,
 				ED1D68682B08549B00FD825A /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,6 +635,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D9CA42D92B0B07E800B6009D /* XCRemoteSwiftPackageReference "forever" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jiachenyee/forever";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D9CA42DA2B0B07E800B6009D /* Forever */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D9CA42D92B0B07E800B6009D /* XCRemoteSwiftPackageReference "forever" */;
+			productName = Forever;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ED1D68322B08546200FD825A /* Project object */;
 }
