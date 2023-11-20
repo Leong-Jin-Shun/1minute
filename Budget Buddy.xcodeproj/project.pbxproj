@@ -25,6 +25,11 @@
 		ED9AFAF42B0A00B100CD38C3 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */; };
 		ED9AFAF62B0AF0BC00CD38C3 /* TrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFAF52B0AF0BC00CD38C3 /* TrackingView.swift */; };
 		ED9AFAF82B0AF60800CD38C3 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */; };
+		ED9AFB002B0AFF6A00CD38C3 /* JungleFever.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED9AFAFF2B0AFF6A00CD38C3 /* JungleFever.ttf */; };
+		ED9AFB032B0B048F00CD38C3 /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */; };
+		ED9AFB052B0B1C5B00CD38C3 /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFB042B0B1C5B00CD38C3 /* NavigationView.swift */; };
+		EDF6673A2B0B2849001ABD3F /* IncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF667392B0B2849001ABD3F /* IncomeView.swift */; };
+		EDF667402B0B2CE8001ABD3F /* Jurassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDF6673F2B0B2CE8001ABD3F /* Jurassic.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +70,11 @@
 		ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		ED9AFAF52B0AF0BC00CD38C3 /* TrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingView.swift; sourceTree = "<group>"; };
 		ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		ED9AFAFF2B0AFF6A00CD38C3 /* JungleFever.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = JungleFever.ttf; path = ../../../Downloads/JungleFever.ttf/JungleFever.ttf; sourceTree = "<group>"; };
+		ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenView.swift; sourceTree = "<group>"; };
+		ED9AFB042B0B1C5B00CD38C3 /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		EDF667392B0B2849001ABD3F /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
+		EDF6673F2B0B2CE8001ABD3F /* Jurassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Jurassic.ttf; path = ../../../Downloads/Jurassic.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,9 +143,14 @@
 				ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */,
 				ED1D68672B08549B00FD825A /* TitleView.swift */,
 				ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */,
+				EDF667392B0B2849001ABD3F /* IncomeView.swift */,
 				ED9AFAF52B0AF0BC00CD38C3 /* TrackingView.swift */,
+				ED9AFB042B0B1C5B00CD38C3 /* NavigationView.swift */,
+				ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */,
 				D9CA42D82B0B00C800B6009D /* Goals */,
 				ED1D686B2B08612C00FD825A /* LeafView.swift */,
+				EDF6673F2B0B2CE8001ABD3F /* Jurassic.ttf */,
+				ED9AFAFF2B0AFF6A00CD38C3 /* JungleFever.ttf */,
 				ED1D68412B08546400FD825A /* Assets.xcassets */,
 				ED1D68432B08546400FD825A /* Preview Content */,
 			);
@@ -277,7 +292,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDF667402B0B2CE8001ABD3F /* Jurassic.ttf in Resources */,
 				ED1D68452B08546400FD825A /* Preview Assets.xcassets in Resources */,
+				ED9AFB002B0AFF6A00CD38C3 /* JungleFever.ttf in Resources */,
 				ED1D68422B08546400FD825A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,6 +323,8 @@
 				D95CE5EC2B0B3F4D00B0DC25 /* GoalDetailView.swift in Sources */,
 				D95CE5EA2B0B29A900B0DC25 /* Goal+Sample.swift in Sources */,
 				ED9AFAF42B0A00B100CD38C3 /* BackgroundView.swift in Sources */,
+				EDF6673A2B0B2849001ABD3F /* IncomeView.swift in Sources */,
+				ED9AFB052B0B1C5B00CD38C3 /* NavigationView.swift in Sources */,
 				ED9AFAF62B0AF0BC00CD38C3 /* TrackingView.swift in Sources */,
 				D95CE5EE2B0B455200B0DC25 /* NewGoalView.swift in Sources */,
 				ED1D686C2B08612C00FD825A /* LeafView.swift in Sources */,
@@ -475,6 +494,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Budget Buddy/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Budget-Buddy-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -504,6 +524,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Budget Buddy/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Budget-Buddy-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
