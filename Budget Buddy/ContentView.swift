@@ -15,11 +15,7 @@ struct ContentView: View {
         ZStack {
             BackgroundView().environmentObject(leafVar)
             
-            TitleView().onTapGesture() {
-                withAnimation() {
-                    leafVar.extrusion = 1.0
-                }
-            }
+            TitleView()
         }.frame(maxWidth: .infinity, maxHeight: .infinity).background(Image("Ouch").resizable().scaledToFill()).ignoresSafeArea().onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation(.interpolatingSpring(stiffness: 225, damping: 15)) {
