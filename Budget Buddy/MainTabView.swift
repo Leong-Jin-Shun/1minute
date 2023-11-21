@@ -14,7 +14,7 @@ struct MainTabView: View {
                     .environmentObject(MoneyMatters())
                     .tabItem {
                         Label("Home", systemImage: "house")
-                    }`
+                    }
                 
                 TrackingView()
                     .tabItem {
