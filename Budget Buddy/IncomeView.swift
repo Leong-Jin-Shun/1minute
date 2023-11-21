@@ -2,7 +2,7 @@
 //  IncomeView.swift
 //  Budget Buddy
 //
-//  Created by Sarah Chia on 20/11/23.
+//  Created by Christian Kaden Lim on 20/11/23.
 //
 
 import SwiftUI
