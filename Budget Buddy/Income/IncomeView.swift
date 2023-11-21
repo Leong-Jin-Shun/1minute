@@ -6,21 +6,11 @@
 //
 
 import SwiftUI
-
-struct Income: Identifiable {
-    
-    var id = UUID()
-    var title: String
-    var amount: Double
-}
+import Forever
 
 struct IncomeView: View {
     
-    @State private var incomes = [
-        Income(title: "ihsgfd", amount: 23.40),
-        Income(title: "asdf", amount: 12.32),
-        Income(title: "ef", amount: 34.09)
-    ]
+    @Forever("incomes") var incomes: [Income] = []
     @State private var showNewIncomeSheet: Bool =  false
 
     var body: some View {
@@ -37,7 +27,7 @@ struct IncomeView: View {
                         VStack(alignment: .leading) {
                             Text("\(income.title)")
                             HStack {
-                                Text("$\(String(income.amount))")
+                                Text("$\(income.amount, specifier: "%.2f")")
                                     .font(.caption)
                                     .foregroundStyle(.gray)
                             }
@@ -65,11 +55,6 @@ struct IncomeView: View {
         }
     }
 }
-    //        .onAppear {
-    //            for i in incomes {
-    //                totalIncome += Double(i)
-    //            }
-    //        }
     
 struct IncomeView_Previews: PreviewProvider {
     static var previews: some View {

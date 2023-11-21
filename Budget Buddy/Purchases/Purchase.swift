@@ -1,23 +1,22 @@
 //
-//  Goal.swift
+//  Spending.swift
 //  Budget Buddy
 //
-//  Created by T Krobot on 20/11/23.
+//  Created by T Krobot on 21/11/23.
 //
 
 import Foundation
 
-struct Goal: Codable, Identifiable {
+struct Purchase: Codable, Identifiable {
     var id = UUID()
     
     var name: String
     var amount: Float
-    var deadline: Date
-    var isPriority: Bool
+    var date: Date
     
     func pretty_date() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY/MM/dd"
-        return dateFormatter.string(from: self.deadline)
+        return dateFormatter.string(from: self.date)
     }
 }

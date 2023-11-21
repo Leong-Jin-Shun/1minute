@@ -1,38 +1,38 @@
 //
-//  GoalsView.swift
+//  PurchasesView.swift
 //  Budget Buddy
 //
-//  Created by T Krobot on 20/11/23.
+//  Created by Christian Kaden Lim on 20/11/23.
 //
 
 import SwiftUI
 import Forever
 
-struct GoalsView: View {
-    @Forever("goals") var goals: [Goal] = []
+struct PurchasesView: View {
+    @Forever("purchases") var purchases: [Purchase] = []
+    
     @State private var showSampleAlert: Bool = false
-    @State private var showNewGoalSheet: Bool = false
+    @State private var showNewPurchaseSheet: Bool = false
     
     var body: some View {
         NavigationStack {
             VStack {
                 HStack {
-                    
-                    Text("$\(goals.reduce(0) { $0 + $1.amount }, specifier: "%.2f")")
+                    Text("$\(purchases.reduce(0) { $0 + $1.amount }, specifier: "%.2f")")
                 }
-                List($goals, editActions: .all) { $goal in
+                List($purchases, editActions: .all) { $purchase in
                     NavigationLink {
-                        GoalDetailView(goal: $goal)
+                        PurchaseDetailView(purchase: $purchase)
                     } label: {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(goal.name)
+                                Text(purchase.name)
                                 HStack {
-                                    Text("$\(goal.amount, specifier: "%.2f")")
+                                    Text("$\(purchase.amount, specifier: "%.2f")")
                                         .font(.caption)
                                         .foregroundStyle(.gray)
                                     Spacer()
-                                    Text("By \(goal.pretty_date())")
+                                    Text("On \(purchase.pretty_date())")
                                         .font(.caption)
                                         .foregroundStyle(.gray)
                                 }
@@ -41,7 +41,7 @@ struct GoalsView: View {
                     }
                 }
             }
-            .navigationTitle("My Goals")
+            .navigationTitle("My Spending")
             .toolbar {
                 ToolbarItemGroup {
                     
@@ -56,7 +56,7 @@ struct GoalsView: View {
                     #endif
                     
                     Button {
-                        showNewGoalSheet = true
+                        showNewPurchaseSheet = true
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -66,14 +66,14 @@ struct GoalsView: View {
                     EditButton()
                 }
             }
-            .sheet(isPresented: $showNewGoalSheet, content: {
-                NewGoalView(goals: $goals)
+            .sheet(isPresented: $showNewPurchaseSheet, content: {
+                NewPurchaseView(purchases: $purchases)
                     .presentationDetents([.medium, .large])
             })
             .alert(isPresented: $showSampleAlert) {
                 Alert(title: Text("Load sample data?"),
                       primaryButton: .destructive(Text("Load")) {
-                    goals = Goal.sampleGoals
+                    purchases = Purchase.sample_purchases
                 },
                       secondaryButton: .cancel(Text("Cancel"))
                 )
@@ -81,11 +81,9 @@ struct GoalsView: View {
         }
     }
 }
-    
 
-        
-struct GoalsView_Previews: PreviewProvider {
+struct PurchasesView_Previews: PreviewProvider {
     static var previews: some View {
-        GoalsView()
+        PurchasesView()
     }
 }

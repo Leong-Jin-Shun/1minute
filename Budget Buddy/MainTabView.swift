@@ -16,7 +16,7 @@ struct MainTabView: View {
                         Label("Home", systemImage: "house")
                     }
                 
-                TrackingView()
+                PurchasesView()
                     .tabItem {
                         Label("Tracking", systemImage: "circle")
                     }
