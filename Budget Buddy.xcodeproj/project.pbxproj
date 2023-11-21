@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3E2F49E2B0B05CF00486166 /* IncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E2F49D2B0B05CF00486166 /* IncomeView.swift */; };
+		A3E2F4A02B0B07D500486166 /* IncomeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E2F49F2B0B07D500486166 /* IncomeDetailView.swift */; };
+		A3E2F4A22B0B35E900486166 /* NewIncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E2F4A12B0B35E900486166 /* NewIncomeView.swift */; };
 		ED1D683E2B08546200FD825A /* Budget_BuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D683D2B08546200FD825A /* Budget_BuddyApp.swift */; };
 		ED1D68402B08546200FD825A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D683F2B08546200FD825A /* ContentView.swift */; };
 		ED1D68422B08546400FD825A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED1D68412B08546400FD825A /* Assets.xcassets */; };
@@ -39,6 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A3E2F49D2B0B05CF00486166 /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
+		A3E2F49F2B0B07D500486166 /* IncomeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeDetailView.swift; sourceTree = "<group>"; };
+		A3E2F4A12B0B35E900486166 /* NewIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIncomeView.swift; sourceTree = "<group>"; };
 		ED1D683A2B08546200FD825A /* Budget Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Budget Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED1D683D2B08546200FD825A /* Budget_BuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Budget_BuddyApp.swift; sourceTree = "<group>"; };
 		ED1D683F2B08546200FD825A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -111,6 +117,9 @@
 				ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */,
 				ED9AFAF52B0AF0BC00CD38C3 /* TrackingView.swift */,
 				ED1D686B2B08612C00FD825A /* LeafView.swift */,
+				A3E2F49D2B0B05CF00486166 /* IncomeView.swift */,
+				A3E2F49F2B0B07D500486166 /* IncomeDetailView.swift */,
+				A3E2F4A12B0B35E900486166 /* NewIncomeView.swift */,
 				ED1D68412B08546400FD825A /* Assets.xcassets */,
 				ED1D68432B08546400FD825A /* Preview Content */,
 			);
@@ -273,11 +282,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED9AFAF42B0A00B100CD38C3 /* BackgroundView.swift in Sources */,
+				A3E2F49E2B0B05CF00486166 /* IncomeView.swift in Sources */,
+				A3E2F4A22B0B35E900486166 /* NewIncomeView.swift in Sources */,
 				ED9AFAF62B0AF0BC00CD38C3 /* TrackingView.swift in Sources */,
 				ED1D686C2B08612C00FD825A /* LeafView.swift in Sources */,
 				ED1D68402B08546200FD825A /* ContentView.swift in Sources */,
 				ED1D683E2B08546200FD825A /* Budget_BuddyApp.swift in Sources */,
 				ED9AFAF82B0AF60800CD38C3 /* HomeScreenView.swift in Sources */,
+				A3E2F4A02B0B07D500486166 /* IncomeDetailView.swift in Sources */,
 				ED1D68682B08549B00FD825A /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
