@@ -17,19 +17,29 @@ struct BackgroundView: View {
     
     var body: some View {
         ZStack {
-            Image("Mountains")
+            ZStack {
+                Image("Mountains").scaleEffect(2).offset(y: 50).brightness(0.25)
+                
+                Rectangle().fill(LinearGradient(colors: [Color(.black).opacity(0), .white], startPoint: .top, endPoint: .bottom)).frame(width: 400, height: 200).offset(y: 125)
+                
+                Image("Jungle Trees").scaleEffect(2).offset(y: 225).brightness(-0.15)
+                
+                Rectangle().fill(LinearGradient(colors: [Color(.black).opacity(0), Color(.black).opacity(0.75)], startPoint: .top, endPoint: .bottom)).frame(width: 400, height: 300).offset(y: 275)
+            }.frame(width: 385)
             
-            Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(10.0 + 20.0 * leafVar.rotation)).scaleEffect(1.0)
-            
-            Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(845.0 - 20.0 * leafVar.rotation)).scaleEffect(1.0)
-            
-            Image("Wooden Pole").rotationEffect(.degrees(-45)).position(x: CGFloat(-5.5 + 10.0 * leafVar.rotation), y: 200).scaleEffect(1.0)
-            
-            Image("Wooden Pole").rotationEffect(.degrees(-45)).position(x: CGFloat(395.5 - 10.0 * leafVar.rotation), y: 200).scaleEffect(1.0)
-            
-            Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(-5.5 + 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
-            
-            Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(395.5 - 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
+            ZStack {
+                Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(10.0 + 20.0 * leafVar.rotation)).scaleEffect(1.0)
+                
+                Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(845.0 - 20.0 * leafVar.rotation)).scaleEffect(1.0)
+                
+                Image("Wooden Pole").rotationEffect(.degrees(-45)).position(x: CGFloat(-5.5 + 10.0 * leafVar.rotation), y: 200).scaleEffect(1.0)
+                
+                Image("Wooden Pole").rotationEffect(.degrees(-45)).position(x: CGFloat(395.5 - 10.0 * leafVar.rotation), y: 200).scaleEffect(1.0)
+                
+                Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(-5.5 + 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
+                
+                Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(395.5 - 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
+            }
             
             ZStack {
                 LeafView().environmentObject(leafVar).rotationEffect(.degrees(90)).position(x: 0, y: 0).scaleEffect(0.3, anchor: .topLeading)
