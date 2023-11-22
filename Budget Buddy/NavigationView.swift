@@ -23,6 +23,8 @@ struct NavigationView: View {
             ZStack {
                 if (currentTab.tab == "Home") {
                     HomeScreenView().environmentObject(moneyMatters)
+                } else if (currentTab.tab == "Tracking") {
+                    TrackingView().environmentObject(moneyMatters)
                 }
             }
             

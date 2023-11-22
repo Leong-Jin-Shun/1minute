@@ -18,10 +18,9 @@ struct Income: Codable {
 enum IncomeRate: Codable {
     case daily
     case fiveWeek //Five days a week
+    case sixWeek //Six days a week
     case weekly
-    case fortnightly
     case monthly
-    case biyearly
     case yearly
     case oneTime
 }

@@ -12,6 +12,7 @@ class PersistentVars: Codable {
     var goals = [] as [Goal]
     var income = [] as [Income]
     var spending = [] as [Spending]
+    var daysLogged = [] as [DayLog]
 }
 
 struct ContentView: View {
@@ -56,9 +57,11 @@ struct ContentView: View {
                 }
             }
             
+            persistentVars.daysLogged.append(DayLog(date: Date.now))
             moneyMatters.goals = persistentVars.goals
             moneyMatters.income = persistentVars.income
             moneyMatters.spending = persistentVars.spending
+            moneyMatters.daysLogged = persistentVars.daysLogged
             
             moneyMatters.spending.append(Spending(name: "Amogus", amount: 10.95, date: Date.now))
             
@@ -66,11 +69,13 @@ struct ContentView: View {
             
             moneyMatters.spending.append(Spending(name: "Scented Candle", amount: 8.00, date: Date.now))
             
-            moneyMatters.income.append(Income(name: "MacDonald's Salary", amount: 10.00, rate: IncomeRate.fiveWeek))
+            moneyMatters.income.append(Income(name: "MacDonald's Salary", amount: 10.00, rate: IncomeRate.sixWeek))
             
-            moneyMatters.goals.append(Goal(name: "A Life", amount: 1000000.00, deadline: Date.now + 1000000))
+            moneyMatters.income.append(Income(name: "Allowance", amount: 2.00, rate: IncomeRate.daily))
             
-            moneyMatters.goals.append(Goal(name: "HotWheels Car", amount: 19.65, deadline: Date.now + 1000))
+            moneyMatters.goals.append(Goal(name: "A Cool Million", amount: 1000000.00, deadline: Date.now + 365 * 86400))
+            
+            moneyMatters.goals.append(Goal(name: "HotWheels Car", amount: 19.65, deadline: Date.now + 86400))
         }
     }
 }

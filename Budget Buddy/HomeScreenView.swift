@@ -11,20 +11,22 @@ class MoneyMatters: ObservableObject {
     @Published var goals = [] as [Goal]
     @Published var income = [] as [Income]
     @Published var spending = [] as [Spending]
+    @Published var daysLogged = [] as [DayLog]
 }
 
 struct HomeScreenView: View {
     
     @EnvironmentObject var moneyMatters: MoneyMatters
     
+    @State private var budget = 0.0
     @State private var totalGoals = 0.0
     @State private var totalSpent = 0.0
     @State private var totalIncome = 0.0
     @State private var accomplishedGoals = ""
+    @State private var daysToSaveUp = 0
     
     var body: some View {
         VStack {
-            
             Text("Budget").font(.custom("Jurassic Park", size: 100)).padding().padding(.top, 50)
             
             Spacer()
@@ -32,7 +34,15 @@ struct HomeScreenView: View {
             ZStack {
                 Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.45).shadow(radius: 5)
                 
-                Text("$\(totalGoals, specifier: "%.2f")").font(.custom("JungleFever", size: 36))
+                VStack {
+                    Text("You should spend less than").font(.custom("Christmas School", size: 18)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: 10)
+                    
+                    Spacer()
+                    
+                    Text("$\(budget, specifier: "%.2f")").font(.custom("JungleFever", size: 36))
+                    
+                    Spacer()
+                }
             }.padding()
             
             ZStack {
@@ -77,16 +87,23 @@ struct HomeScreenView: View {
             
         }.onAppear() {
             moneyMatters.goals.forEach {
-                totalGoals += $0.amount
+                if (Int($0.deadline.timeIntervalSince1970) >= Int(Date.now.timeIntervalSince1970)) {
+                    daysToSaveUp = (Int($0.deadline.timeIntervalSince1970) - Int(Date.now.timeIntervalSince1970)) / 86400
+                    totalGoals += $0.amount / Double(daysToSaveUp)
+                }
             }
             
             moneyMatters.spending.forEach {
-                totalSpent += $0.amount
+                if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) <= 86400) {
+                    totalSpent += $0.amount
+                }
             }
             
             moneyMatters.income.forEach {
                 totalIncome += $0.amount
             }
+            
+            budget = totalIncome - totalGoals
             
             if (totalIncome - totalSpent < totalGoals) {
                 accomplishedGoals = "not "
@@ -104,7 +121,13 @@ struct HomeScreenViewMinion: View {
     @StateObject var moneyMatters = MoneyMatters()
     
     var body: some View {
-        HomeScreenView().environmentObject(moneyMatters)
+        ZStack {
+            HomeScreenView().environmentObject(moneyMatters)
+        }.onAppear() {
+            moneyMatters.goals.append(Goal(name: "A Life", amount: 1000000, deadline: Date.now + 30 * 86400))
+            
+            moneyMatters.goals.append(Goal(name: "HotWheels Car", amount: 19.65, deadline: Date.now + 86400))
+        }
     }
 }
 

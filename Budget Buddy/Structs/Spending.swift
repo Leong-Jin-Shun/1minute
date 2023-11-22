@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Spending: Codable {
+struct Spending: Identifiable, Codable {
     var id = UUID()
     
     var name: String
