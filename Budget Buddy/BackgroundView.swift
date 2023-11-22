@@ -24,7 +24,7 @@ struct BackgroundView: View {
                 
                 Image("Jungle Trees").scaleEffect(2).offset(y: 225).brightness(-0.15)
                 
-                Rectangle().fill(LinearGradient(colors: [Color(.black).opacity(0), Color(.black).opacity(0.75)], startPoint: .top, endPoint: .bottom)).frame(width: 400, height: 300).offset(y: 275)
+                Rectangle().fill(LinearGradient(colors: [Color(.black).opacity(0), Color(.black).opacity(0.75)], startPoint: .top, endPoint: .bottom)).frame(width: 400, height: 300).offset(y: 300)
             }.frame(width: 385)
             
             ZStack {

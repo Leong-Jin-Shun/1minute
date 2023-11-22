@@ -8,19 +8,19 @@
 import SwiftUI
 
 class MoneyMatters: ObservableObject {
-    @Published var goals = [] as [Double]
-    @Published var income = [] as [Double]
-    @Published var spending = [] as [Double]
+    @Published var goals = [] as [Goal]
+    @Published var income = [] as [Income]
+    @Published var spending = [] as [Spending]
 }
 
 struct HomeScreenView: View {
     
     @EnvironmentObject var moneyMatters: MoneyMatters
     
-    @State private var budget = 0.0
+    @State private var totalGoals = 0.0
     @State private var totalSpent = 0.0
     @State private var totalIncome = 0.0
-    @State private var exceededBudget = ""
+    @State private var accomplishedGoals = ""
     
     var body: some View {
         VStack {
@@ -32,13 +32,13 @@ struct HomeScreenView: View {
             ZStack {
                 Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.45).shadow(radius: 5)
                 
-                Text("$\(budget, specifier: "%.2f")").font(.custom("JungleFever", size: 36))
+                Text("$\(totalGoals, specifier: "%.2f")").font(.custom("JungleFever", size: 36))
             }.padding()
             
             ZStack {
                 Image("Plank").resizable().scaledToFit().padding()
                 
-                Text("You have spent a total of $\(totalSpent, specifier: "%.2f") today. You have \(exceededBudget)exceeded your budget.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
+                Text("You have spent a total of $\(totalSpent, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
             }
             
             Spacer()
@@ -48,8 +48,22 @@ struct HomeScreenView: View {
                     ZStack {
                         Image("Plank").resizable().scaledToFit()
 
-                        Text("You spent $\(moneyMatters.spending[i], specifier: "%.2f"), you pig")
-                    }.scaleEffect(0.75).padding(-15)
+                        HStack {
+                            VStack {
+                                HStack {
+                                    Text("\(moneyMatters.spending[i].name)")
+                                    
+                                    Spacer()
+                                }
+                                
+                                Text("\(moneyMatters.spending[i].date)").opacity(0.75).font(.custom("Christmas School", size: 16))
+                            }
+                            
+                            Spacer()
+                            
+                            Text("$\(moneyMatters.spending[i].amount, specifier: "%.2f")")
+                        }.font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5)
+                    }.scaleEffect(0.65).padding(-15)
                 }
             }
             
@@ -63,20 +77,23 @@ struct HomeScreenView: View {
             
         }.onAppear() {
             moneyMatters.goals.forEach {
-                budget += $0
+                totalGoals += $0.amount
             }
             
             moneyMatters.spending.forEach {
-                totalSpent += $0
+                totalSpent += $0.amount
             }
             
             moneyMatters.income.forEach {
-                totalSpent -= $0
-                totalIncome += $0
+                totalIncome += $0.amount
             }
             
-            if (totalSpent <= budget) {
-                exceededBudget = "not "
+            if (totalIncome - totalSpent < totalGoals) {
+                accomplishedGoals = "not "
+            }
+            
+            if (totalIncome - totalSpent == totalGoals) {
+                accomplishedGoals = "barely "
             }
         }
     }

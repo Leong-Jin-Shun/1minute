@@ -33,6 +33,8 @@
 		ED9AFAF42B0A00B100CD38C3 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */; };
 		ED9AFAF62B0AF0BC00CD38C3 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFAF52B0AF0BC00CD38C3 /* PurchasesView.swift */; };
 		ED9AFB052B0B1C5B00CD38C3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFB042B0B1C5B00CD38C3 /* MainTabView.swift */; };
+		EDCE06FC2B0DA3BF003B263D /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE06FB2B0DA3BF003B263D /* Goals.swift */; };
+		EDCE07002B0DA3D3003B263D /* Spending.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE06FF2B0DA3D3003B263D /* Spending.swift */; };
 		EDF667552B0CA1B5001ABD3F /* Jurassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */; };
 		EDF667572B0CA4EF001ABD3F /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */; };
 		EDF6675B2B0CAC14001ABD3F /* Christmas School.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */; };
@@ -61,7 +63,7 @@
 		A3E2F49D2B0B05CF00486166 /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
 		A3E2F49F2B0B07D500486166 /* IncomeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeDetailView.swift; sourceTree = "<group>"; };
 		A3E2F4A12B0B35E900486166 /* NewIncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewIncomeView.swift; sourceTree = "<group>"; };
-		D95B97652B0C4D9300137B90 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Income.swift; sourceTree = "<group>"; };
+		D95B97652B0C4D9300137B90 /* Income.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Income.swift; path = ../Income/Income.swift; sourceTree = "<group>"; };
 		D95CE5E92B0B29A900B0DC25 /* Goal+Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Goal+Sample.swift"; sourceTree = "<group>"; };
 		D95CE5EB2B0B3F4D00B0DC25 /* GoalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailView.swift; sourceTree = "<group>"; };
 		D95CE5ED2B0B455200B0DC25 /* NewGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGoalView.swift; sourceTree = "<group>"; };
@@ -88,6 +90,8 @@
 		ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenView.swift; sourceTree = "<group>"; };
 		ED9AFB042B0B1C5B00CD38C3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		EDCE06FB2B0DA3BF003B263D /* Goals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
+		EDCE06FF2B0DA3D3003B263D /* Spending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spending.swift; sourceTree = "<group>"; };
 		EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Jurassic.ttf; path = ../Jurassic.ttf; sourceTree = "<group>"; };
 		EDF667582B0CA50F001ABD3F /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Christmas School.otf"; sourceTree = "<group>"; };
@@ -123,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				A3E2F49D2B0B05CF00486166 /* IncomeView.swift */,
-				D95B97652B0C4D9300137B90 /* Income.swift */,
 				A3E2F49F2B0B07D500486166 /* IncomeDetailView.swift */,
 				A3E2F4A12B0B35E900486166 /* NewIncomeView.swift */,
 			);
@@ -179,14 +182,15 @@
 			children = (
 				ED1D683D2B08546200FD825A /* Budget_BuddyApp.swift */,
 				ED1D683F2B08546200FD825A /* ContentView.swift */,
-				ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */,
-				ED1D68672B08549B00FD825A /* TitleView.swift */,
 				ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */,
-				ED9AFB042B0B1C5B00CD38C3 /* MainTabView.swift */,
-				D9CA42D82B0B00C800B6009D /* Goals */,
-				D95B97642B0C4C6200137B90 /* Income */,
+				EDF667582B0CA50F001ABD3F /* NavigationView.swift */,
+				EDCE06FA2B0DA37E003B263D /* Structs */,
+				ED1D68672B08549B00FD825A /* TitleView.swift */,
+				ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */,
 				ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */,
 				ED1D686B2B08612C00FD825A /* LeafView.swift */,
+				D9CA42D82B0B00C800B6009D /* Goals */,
+				D95B97642B0C4C6200137B90 /* Income */,
 				EDF667562B0CA4C7001ABD3F /* Things We Might Not Need */,
 				ED1D68412B08546400FD825A /* Assets.xcassets */,
 				EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */,
@@ -221,10 +225,20 @@
 			path = "Budget BuddyUITests";
 			sourceTree = "<group>";
 		};
+		EDCE06FA2B0DA37E003B263D /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				EDCE06FB2B0DA3BF003B263D /* Goals.swift */,
+				D95B97652B0C4D9300137B90 /* Income.swift */,
+				EDCE06FF2B0DA3D3003B263D /* Spending.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
 		EDF667562B0CA4C7001ABD3F /* Things We Might Not Need */ = {
 			isa = PBXGroup;
 			children = (
-				EDF667582B0CA50F001ABD3F /* NavigationView.swift */,
+				ED9AFB042B0B1C5B00CD38C3 /* MainTabView.swift */,
 				D9F69FD62B0C50A4005FEAC4 /* Purchases */,
 			);
 			path = "Things We Might Not Need";
@@ -388,6 +402,8 @@
 				D9F69FDC2B0C566F005FEAC4 /* Purchase+Sample.swift in Sources */,
 				ED1D683E2B08546200FD825A /* Budget_BuddyApp.swift in Sources */,
 				D9F69FDE2B0C5952005FEAC4 /* PurchaseDetailView.swift in Sources */,
+				EDCE07002B0DA3D3003B263D /* Spending.swift in Sources */,
+				EDCE06FC2B0DA3BF003B263D /* Goals.swift in Sources */,
 				A3E2F4A02B0B07D500486166 /* IncomeDetailView.swift in Sources */,
 				D9CA42D72B0AFFB000B6009D /* Goal.swift in Sources */,
 				ED1D68682B08549B00FD825A /* TitleView.swift in Sources */,

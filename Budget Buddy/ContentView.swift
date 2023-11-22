@@ -6,8 +6,17 @@
 //
 
 import SwiftUI
+import Forever
+
+class PersistentVars: Codable {
+    var goals = [] as [Goal]
+    var income = [] as [Income]
+    var spending = [] as [Spending]
+}
 
 struct ContentView: View {
+    
+    @Forever("PersistentVars") var persistentVars = PersistentVars()
     
     @StateObject var leafVar = LeafVar()
     @StateObject var moneyMatters = MoneyMatters()
@@ -47,11 +56,21 @@ struct ContentView: View {
                 }
             }
             
-            for _ in 1...10 {
-                moneyMatters.spending.append(420.69)
-                moneyMatters.goals.append(420.0)
-                moneyMatters.income.append(69.0)
-            }
+            moneyMatters.goals = persistentVars.goals
+            moneyMatters.income = persistentVars.income
+            moneyMatters.spending = persistentVars.spending
+            
+            moneyMatters.spending.append(Spending(name: "Amogus", amount: 10.95, date: Date.now))
+            
+            moneyMatters.spending.append(Spending(name: "Fortnite Skins", amount: 120.25, date: Date.now))
+            
+            moneyMatters.spending.append(Spending(name: "Scented Candle", amount: 8.00, date: Date.now))
+            
+            moneyMatters.income.append(Income(name: "MacDonald's Salary", amount: 10.00, rate: IncomeRate.fiveWeek))
+            
+            moneyMatters.goals.append(Goal(name: "A Life", amount: 1000000.00, deadline: Date.now + 1000000))
+            
+            moneyMatters.goals.append(Goal(name: "HotWheels Car", amount: 19.65, deadline: Date.now + 1000))
         }
     }
 }

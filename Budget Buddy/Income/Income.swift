@@ -7,19 +7,21 @@
 
 import Foundation
 
-struct Income: Codable, Identifiable {
+struct Income: Codable {
     var id = UUID()
     
-    var title: String
+    var name: String
     var amount: Double
-    var refresh: IncomeRate
+    var rate: IncomeRate
 }
 
 enum IncomeRate: Codable {
     case daily
+    case fiveWeek //Five days a week
     case weekly
     case fortnightly
     case monthly
     case biyearly
     case yearly
+    case oneTime
 }
