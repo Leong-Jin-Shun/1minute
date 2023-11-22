@@ -35,6 +35,7 @@
 		ED9AFB052B0B1C5B00CD38C3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFB042B0B1C5B00CD38C3 /* MainTabView.swift */; };
 		EDCE06FC2B0DA3BF003B263D /* Goals.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE06FB2B0DA3BF003B263D /* Goals.swift */; };
 		EDCE07002B0DA3D3003B263D /* Spending.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE06FF2B0DA3D3003B263D /* Spending.swift */; };
+		EDCE07022B0DACF8003B263D /* JungleFever.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDCE07012B0DACF8003B263D /* JungleFever.ttf */; };
 		EDF667552B0CA1B5001ABD3F /* Jurassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */; };
 		EDF667572B0CA4EF001ABD3F /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */; };
 		EDF6675B2B0CAC14001ABD3F /* Christmas School.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */; };
@@ -92,6 +93,7 @@
 		ED9AFB042B0B1C5B00CD38C3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		EDCE06FB2B0DA3BF003B263D /* Goals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goals.swift; sourceTree = "<group>"; };
 		EDCE06FF2B0DA3D3003B263D /* Spending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spending.swift; sourceTree = "<group>"; };
+		EDCE07012B0DACF8003B263D /* JungleFever.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = JungleFever.ttf; path = ../JungleFever.ttf; sourceTree = "<group>"; };
 		EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Jurassic.ttf; path = ../Jurassic.ttf; sourceTree = "<group>"; };
 		EDF667582B0CA50F001ABD3F /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
 		EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Christmas School.otf"; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				EDF667562B0CA4C7001ABD3F /* Things We Might Not Need */,
 				ED1D68412B08546400FD825A /* Assets.xcassets */,
 				EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */,
+				EDCE07012B0DACF8003B263D /* JungleFever.ttf */,
 				EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */,
 				ED1D68432B08546400FD825A /* Preview Content */,
 			);
@@ -357,6 +360,7 @@
 				ED1D68452B08546400FD825A /* Preview Assets.xcassets in Resources */,
 				EDF6675B2B0CAC14001ABD3F /* Christmas School.otf in Resources */,
 				ED1D68422B08546400FD825A /* Assets.xcassets in Resources */,
+				EDCE07022B0DACF8003B263D /* JungleFever.ttf in Resources */,
 				EDF667552B0CA1B5001ABD3F /* Jurassic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
