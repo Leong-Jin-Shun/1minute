@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @StateObject var leafVar = LeafVar()
     @StateObject var moneyMatters = MoneyMatters()
+    @StateObject var currentTab = CurrentTab()
     @State private var titleVar = 0.0
     @State private var transparency = 0.0
     
@@ -19,13 +20,13 @@ struct ContentView: View {
             BackgroundView().environmentObject(leafVar)
             
             if (transparency != 1.0) {
-                Image("Rock Plate").resizable().scaledToFit().offset(y: CGFloat(-200.0 * titleVar)).scaleEffect(1.0 - 0.1 * titleVar).shadow(radius: 5)
+                Image("Rock Plate").resizable().scaledToFit().offset(y: CGFloat(-187.5 * titleVar)).scaleEffect(1.0 - 0.09 * titleVar).shadow(radius: 5)
                 
-                TitleView().offset(y: CGFloat(-200.0 * titleVar)).scaleEffect(1.0 - 0.1 * titleVar).opacity(1.0 - titleVar)
+                TitleView().offset(y: CGFloat(-187.5 * titleVar)).scaleEffect(1.0 - 0.1 * titleVar).opacity(1.0 - titleVar)
             }
             
             ZStack {
-                HomeScreenView().environmentObject(moneyMatters)
+                NavigationView().environmentObject(moneyMatters).environmentObject(currentTab).padding()
             }.opacity(transparency)
         }.frame(maxWidth: .infinity, maxHeight: .infinity).background(Image("Sky").resizable().scaledToFill()).ignoresSafeArea().onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {

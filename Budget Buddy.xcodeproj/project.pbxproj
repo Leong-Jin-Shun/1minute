@@ -32,8 +32,12 @@
 		ED1D686C2B08612C00FD825A /* LeafView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1D686B2B08612C00FD825A /* LeafView.swift */; };
 		ED9AFAF42B0A00B100CD38C3 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */; };
 		ED9AFAF62B0AF0BC00CD38C3 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFAF52B0AF0BC00CD38C3 /* PurchasesView.swift */; };
-		ED9AFAF82B0AF60800CD38C3 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */; };
 		ED9AFB052B0B1C5B00CD38C3 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFB042B0B1C5B00CD38C3 /* MainTabView.swift */; };
+		EDF667552B0CA1B5001ABD3F /* Jurassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */; };
+		EDF667572B0CA4EF001ABD3F /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */; };
+		EDF6675B2B0CAC14001ABD3F /* Christmas School.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */; };
+		EDF667602B0CAD2E001ABD3F /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */; };
+		EDF667692B0CE9EA001ABD3F /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF667582B0CA50F001ABD3F /* NavigationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,9 +85,12 @@
 		ED1D686B2B08612C00FD825A /* LeafView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeafView.swift; sourceTree = "<group>"; };
 		ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		ED9AFAF52B0AF0BC00CD38C3 /* PurchasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesView.swift; sourceTree = "<group>"; };
-		ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenView.swift; sourceTree = "<group>"; };
 		ED9AFB042B0B1C5B00CD38C3 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Jurassic.ttf; path = ../Jurassic.ttf; sourceTree = "<group>"; };
+		EDF667582B0CA50F001ABD3F /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Christmas School.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,13 +182,15 @@
 				ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */,
 				ED1D68672B08549B00FD825A /* TitleView.swift */,
 				ED9AFAF72B0AF60800CD38C3 /* HomeScreenView.swift */,
-				D9F69FD62B0C50A4005FEAC4 /* Purchases */,
 				ED9AFB042B0B1C5B00CD38C3 /* MainTabView.swift */,
-				ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */,
 				D9CA42D82B0B00C800B6009D /* Goals */,
-				ED1D686B2B08612C00FD825A /* LeafView.swift */,
 				D95B97642B0C4C6200137B90 /* Income */,
+				ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */,
+				ED1D686B2B08612C00FD825A /* LeafView.swift */,
+				EDF667562B0CA4C7001ABD3F /* Things We Might Not Need */,
 				ED1D68412B08546400FD825A /* Assets.xcassets */,
+				EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */,
+				EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */,
 				ED1D68432B08546400FD825A /* Preview Content */,
 			);
 			path = "Budget Buddy";
@@ -210,6 +219,15 @@
 				ED1D685A2B08546500FD825A /* Budget_BuddyUITestsLaunchTests.swift */,
 			);
 			path = "Budget BuddyUITests";
+			sourceTree = "<group>";
+		};
+		EDF667562B0CA4C7001ABD3F /* Things We Might Not Need */ = {
+			isa = PBXGroup;
+			children = (
+				EDF667582B0CA50F001ABD3F /* NavigationView.swift */,
+				D9F69FD62B0C50A4005FEAC4 /* Purchases */,
+			);
+			path = "Things We Might Not Need";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,7 +341,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED1D68452B08546400FD825A /* Preview Assets.xcassets in Resources */,
+				EDF6675B2B0CAC14001ABD3F /* Christmas School.otf in Resources */,
 				ED1D68422B08546400FD825A /* Assets.xcassets in Resources */,
+				EDF667552B0CA1B5001ABD3F /* Jurassic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,13 +378,15 @@
 				ED9AFB052B0B1C5B00CD38C3 /* MainTabView.swift in Sources */,
 				ED9AFAF62B0AF0BC00CD38C3 /* PurchasesView.swift in Sources */,
 				D95CE5EE2B0B455200B0DC25 /* NewGoalView.swift in Sources */,
+				EDF667572B0CA4EF001ABD3F /* ScreenView.swift in Sources */,
 				D9F69FDA2B0C52E1005FEAC4 /* Purchase.swift in Sources */,
+				EDF667692B0CE9EA001ABD3F /* NavigationView.swift in Sources */,
 				ED1D686C2B08612C00FD825A /* LeafView.swift in Sources */,
 				D9CA42D52B0AFF5D00B6009D /* GoalsView.swift in Sources */,
+				EDF667602B0CAD2E001ABD3F /* HomeScreenView.swift in Sources */,
 				ED1D68402B08546200FD825A /* ContentView.swift in Sources */,
 				D9F69FDC2B0C566F005FEAC4 /* Purchase+Sample.swift in Sources */,
 				ED1D683E2B08546200FD825A /* Budget_BuddyApp.swift in Sources */,
-				ED9AFAF82B0AF60800CD38C3 /* HomeScreenView.swift in Sources */,
 				D9F69FDE2B0C5952005FEAC4 /* PurchaseDetailView.swift in Sources */,
 				A3E2F4A02B0B07D500486166 /* IncomeDetailView.swift in Sources */,
 				D9CA42D72B0AFFB000B6009D /* Goal.swift in Sources */,

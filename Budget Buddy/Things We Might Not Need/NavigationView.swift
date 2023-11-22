@@ -44,6 +44,8 @@ struct NavigationView: View {
                         
                         Rectangle().frame(width: 50, height: 50).opacity(0).contentShape(Rectangle()).onTapGesture() {
                             currentTab.tab = "Home"
+                            
+                            print("User has gone to Home")
                         }
                     }
                     
@@ -60,6 +62,8 @@ struct NavigationView: View {
                         
                         Rectangle().frame(width: 50, height: 50).opacity(0).contentShape(Rectangle()).onTapGesture() {
                             currentTab.tab = "Tracking"
+                            
+                            print("User has gone to Tracking")
                         }
                     }
                     
@@ -76,6 +80,8 @@ struct NavigationView: View {
                         
                         Rectangle().frame(width: 50, height: 50).opacity(0).contentShape(Rectangle()).onTapGesture() {
                             currentTab.tab = "Income"
+                            
+                            print("User has gone to Income")
                         }
                     }
                     
@@ -92,6 +98,8 @@ struct NavigationView: View {
                         
                         Rectangle().frame(width: 50, height: 50).opacity(0).contentShape(Rectangle()).onTapGesture() {
                             currentTab.tab = "Goals"
+                            
+                            print("User has gone to Goals")
                         }
                     }
                 }.padding().padding(.bottom, -5)

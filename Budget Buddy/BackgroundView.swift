@@ -17,6 +17,8 @@ struct BackgroundView: View {
     
     var body: some View {
         ZStack {
+            Image("Mountains")
+            
             Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(10.0 + 20.0 * leafVar.rotation)).scaleEffect(1.0)
             
             Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(845.0 - 20.0 * leafVar.rotation)).scaleEffect(1.0)
@@ -29,13 +31,15 @@ struct BackgroundView: View {
             
             Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(395.5 - 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
             
-            LeafView().environmentObject(leafVar).rotationEffect(.degrees(90)).position(x: 0, y: 0).scaleEffect(0.3, anchor: .topLeading)
-            
-            LeafView().environmentObject(leafVar).rotationEffect(.degrees(180)).position(x: 1300, y: 0).scaleEffect(0.3, anchor: .topLeading)
-            
-            LeafView().environmentObject(leafVar).rotationEffect(.degrees(-90)).position(x: 1300, y: 2800).scaleEffect(0.3, anchor: .topLeading)
-            
-            LeafView().environmentObject(leafVar).position(x: 0, y: 2800).scaleEffect(0.3, anchor: .topLeading)
+            ZStack {
+                LeafView().environmentObject(leafVar).rotationEffect(.degrees(90)).position(x: 0, y: 0).scaleEffect(0.3, anchor: .topLeading)
+                
+                LeafView().environmentObject(leafVar).rotationEffect(.degrees(180)).position(x: 1300, y: 0).scaleEffect(0.3, anchor: .topLeading)
+                
+                LeafView().environmentObject(leafVar).rotationEffect(.degrees(-90)).position(x: 1300, y: 2800).scaleEffect(0.3, anchor: .topLeading)
+                
+                LeafView().environmentObject(leafVar).position(x: 0, y: 2800).scaleEffect(0.3, anchor: .topLeading)
+            }
         }
     }
 }
