@@ -66,7 +66,11 @@ struct HomeScreenView: View {
                                     Spacer()
                                 }
                                 
-                                Text("\(moneyMatters.spending[i].date)").opacity(0.75).font(.custom("Christmas School", size: 16))
+                                HStack {
+                                    Text("\(moneyMatters.spending[i].date, style: .date)").opacity(0.75).font(.custom("Christmas School", size: 16))
+                                    
+                                    Spacer()
+                                }
                             }
                             
                             Spacer()
@@ -89,7 +93,12 @@ struct HomeScreenView: View {
             moneyMatters.goals.forEach {
                 if (Int($0.deadline.timeIntervalSince1970) >= Int(Date.now.timeIntervalSince1970)) {
                     daysToSaveUp = (Int($0.deadline.timeIntervalSince1970) - Int(Date.now.timeIntervalSince1970)) / 86400
-                    totalGoals += $0.amount / Double(daysToSaveUp)
+                    
+                    if (daysToSaveUp <= 1) {
+                        totalGoals += $0.amount
+                    } else {
+                        totalGoals += $0.amount / Double(daysToSaveUp)
+                    }
                 }
             }
             

@@ -12,6 +12,7 @@ struct Income: Codable {
     
     var name: String
     var amount: Double
+    var date: Date
     var rate: IncomeRate
 }
 

@@ -45,44 +45,46 @@ struct TrackingView: View {
                     Text("You spent $\(totalSpentToday, specifier: "%.2f") today.\nYou have a streak of \((streak == 1) ? "1 day" : "\(streak) days"), well done!").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
                 }
             }.onAppear() {
-                moneyMatters.spending.forEach {
-                    rawSpendingValues.append($0)
-                }
-                
-                rawSpendingValues.sort() {
-                    $0.date > $1.date
-                }
-                
-                currentDayIndex = 0
-                barChartValues.append(0.0)
-                rawSpendingValues.forEach {
-                    if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) <= daysViewed * 86400) {
-                        if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) >= currentDayIndex * 86400) {
-                            currentDayIndex += 1
-                            barChartValues.append(0.0)
-                        }
-                        
-                        barChartValues[currentDayIndex] += $0.amount
+                if (moneyMatters.spending.count > 0){
+                    moneyMatters.spending.forEach {
+                        rawSpendingValues.append($0)
                     }
-                }
-                
-                barChartValues.remove(at: 0)
-                
-                for _ in (1...(daysViewed - currentDayIndex)) {
+                    
+                    rawSpendingValues.sort() {
+                        $0.date > $1.date
+                    }
+                    
+                    currentDayIndex = 0
                     barChartValues.append(0.0)
-                }
-                
-                totalSpentToday = barChartValues[0]
-                barChartValues = barChartValues.reversed()
-                
-                currentDayIndex = 1
-                for i in (0...(moneyMatters.daysLogged.count - 1)) {
-                    if (currentDayIndex != 1000000000000) {
-                        if (Int(Date.now.timeIntervalSince1970) - Int(moneyMatters.daysLogged[i].date.timeIntervalSince1970) > (currentDayIndex + 1) *  86400) {
-                            currentDayIndex = 1000000000000
-                        } else if (Int(Date.now.timeIntervalSince1970) - Int(moneyMatters.daysLogged[i].date.timeIntervalSince1970) > currentDayIndex *  86400) {
-                            streak += 1
-                            currentDayIndex += 1
+                    rawSpendingValues.forEach {
+                        if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) <= daysViewed * 86400) {
+                            if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) >= currentDayIndex * 86400) {
+                                currentDayIndex += 1
+                                barChartValues.append(0.0)
+                            }
+                            
+                            barChartValues[currentDayIndex] += $0.amount
+                        }
+                    }
+                    
+                    barChartValues.remove(at: 0)
+                    
+                    for _ in (1...(daysViewed - currentDayIndex)) {
+                        barChartValues.append(0.0)
+                    }
+                    
+                    totalSpentToday = barChartValues[0]
+                    barChartValues = barChartValues.reversed()
+                    
+                    currentDayIndex = 1
+                    for i in (0...(moneyMatters.daysLogged.count - 1)) {
+                        if (currentDayIndex != 1000000000000) {
+                            if (Int(Date.now.timeIntervalSince1970) - Int(moneyMatters.daysLogged[i].date.timeIntervalSince1970) > (currentDayIndex + 1) *  86400) {
+                                currentDayIndex = 1000000000000
+                            } else if (Calendar.current.isDate(moneyMatters.daysLogged[i].date, inSameDayAs: Date(timeIntervalSince1970: TimeInterval(Int(Date.now.timeIntervalSince1970) - (currentDayIndex * 86400))))) {
+                                streak += 1
+                                currentDayIndex += 1
+                            }
                         }
                     }
                 }

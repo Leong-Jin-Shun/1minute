@@ -69,9 +69,9 @@ struct ContentView: View {
             
             moneyMatters.spending.append(Spending(name: "Scented Candle", amount: 8.00, date: Date.now))
             
-            moneyMatters.income.append(Income(name: "MacDonald's Salary", amount: 10.00, rate: IncomeRate.sixWeek))
+            moneyMatters.income.append(Income(name: "MacDonald's Salary", amount: 10.00, date: Date.now, rate: IncomeRate.sixWeek))
             
-            moneyMatters.income.append(Income(name: "Allowance", amount: 2.00, rate: IncomeRate.daily))
+            moneyMatters.income.append(Income(name: "Allowance", amount: 2.00, date: Date.now, rate: IncomeRate.daily))
             
             moneyMatters.goals.append(Goal(name: "A Cool Million", amount: 1000000.00, deadline: Date.now + 365 * 86400))
             

@@ -13,10 +13,4 @@ struct Spending: Identifiable, Codable {
     var name: String
     var amount: Double
     var date: Date
-    
-    func dateFormat() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY/MM/dd"
-        return dateFormatter.string(from: self.date)
-    }
 }

@@ -25,6 +25,10 @@ struct NavigationView: View {
                     HomeScreenView().environmentObject(moneyMatters)
                 } else if (currentTab.tab == "Tracking") {
                     TrackingView().environmentObject(moneyMatters)
+                } else if (currentTab.tab == "Income") {
+                    IncomeView().environmentObject(moneyMatters)
+                } else if (currentTab.tab == "Goals") {
+                    GoalsView().environmentObject(moneyMatters)
                 }
             }
             
@@ -34,75 +38,85 @@ struct NavigationView: View {
                 Spacer()
                 Spacer()
                 
-                HStack {
-                    ZStack {
-                        ScreenView().frame(width: 50, height: 50)
-                        
-                        if (currentTab.tab == "Home") {
-                            Image(systemName: "house.fill").scaleEffect(1.5).foregroundStyle(.green)
-                        } else {
-                            Image(systemName: "house.fill").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
+                ZStack {
+                    HStack {
+                        ZStack {
+                            ScreenView().frame(width: 50, height: 50)
+                            
+                            if (currentTab.tab == "Home") {
+                                Image(systemName: "house.fill").scaleEffect(1.5).foregroundStyle(.green)
+                            } else {
+                                Image(systemName: "house.fill").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
+                            }
                         }
                         
-                        Rectangle().frame(width: 50, height: 50).opacity(0).contentShape(Rectangle()).onTapGesture() {
+                        Spacer()
+                        
+                        ZStack {
+                            ScreenView().frame(width: 50, height: 50)
+                            
+                            if (currentTab.tab == "Tracking") {
+                                Image(systemName: "antenna.radiowaves.left.and.right").scaleEffect(1.5).foregroundStyle(.green)
+                            } else {
+                                Image(systemName: "antenna.radiowaves.left.and.right").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        ZStack {
+                            ScreenView().frame(width: 50, height: 50)
+                            
+                            if (currentTab.tab == "Income") {
+                                Image(systemName: "briefcase.fill").scaleEffect(1.5).foregroundStyle(.green)
+                            } else {
+                                Image(systemName: "briefcase.fill").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        ZStack {
+                            ScreenView().frame(width: 50, height: 50)
+                            
+                            if (currentTab.tab == "Goals") {
+                                Image(systemName: "mappin.and.ellipse").scaleEffect(1.5).foregroundStyle(.green)
+                            } else {
+                                Image(systemName: "mappin.and.ellipse").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
+                            }
+                        }
+                    }
+                    
+                    HStack {
+                        Button {
                             currentTab.tab = "Home"
-                            
-                            print("User has gone to Home")
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    ZStack {
-                        ScreenView().frame(width: 50, height: 50)
+                        } label: {
+                            Rectangle().opacity(0)
+                        }.frame(width: 50, height: 50).contentShape(Rectangle())
                         
-                        if (currentTab.tab == "Tracking") {
-                            Image(systemName: "antenna.radiowaves.left.and.right").scaleEffect(1.5).foregroundStyle(.green)
-                        } else {
-                            Image(systemName: "antenna.radiowaves.left.and.right").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
-                        }
+                        Spacer()
                         
-                        Rectangle().frame(width: 50, height: 50).opacity(0).contentShape(Rectangle()).onTapGesture() {
+                        Button {
                             currentTab.tab = "Tracking"
-                            
-                            print("User has gone to Tracking")
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    ZStack {
-                        ScreenView().frame(width: 50, height: 50)
+                        } label: {
+                            Rectangle().opacity(0)
+                        }.frame(width: 50, height: 50).contentShape(Rectangle())
                         
-                        if (currentTab.tab == "Income") {
-                            Image(systemName: "briefcase.fill").scaleEffect(1.5).foregroundStyle(.green)
-                        } else {
-                            Image(systemName: "briefcase.fill").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
-                        }
+                        Spacer()
                         
-                        Rectangle().frame(width: 50, height: 50).opacity(0).contentShape(Rectangle()).onTapGesture() {
+                        Button {
                             currentTab.tab = "Income"
-                            
-                            print("User has gone to Income")
-                        }
-                    }
-                    
-                    Spacer()
-                    
-                    ZStack {
-                        ScreenView().frame(width: 50, height: 50)
+                        } label: {
+                            Rectangle().opacity(0)
+                        }.frame(width: 50, height: 50).contentShape(Rectangle())
                         
-                        if (currentTab.tab == "Goals") {
-                            Image(systemName: "mappin.and.ellipse").scaleEffect(1.5).foregroundStyle(.green)
-                        } else {
-                            Image(systemName: "mappin.and.ellipse").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
-                        }
+                        Spacer()
                         
-                        Rectangle().frame(width: 50, height: 50).opacity(0).contentShape(Rectangle()).onTapGesture() {
+                        Button {
                             currentTab.tab = "Goals"
-                            
-                            print("User has gone to Goals")
-                        }
+                        } label: {
+                            Rectangle().opacity(0)
+                        }.frame(width: 50, height: 50).contentShape(Rectangle())
                     }
                 }.padding().padding(.bottom, -5)
                 

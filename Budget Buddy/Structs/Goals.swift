@@ -13,10 +13,4 @@ struct Goal: Codable {
     var name: String
     var amount: Double
     var deadline: Date
-    
-    func dateFormat() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY/MM/dd"
-        return dateFormatter.string(from: self.deadline)
-    }
 }
