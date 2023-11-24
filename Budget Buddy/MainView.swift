@@ -1,5 +1,5 @@
 //
-//  NavigationView.swift
+//  MainView.swift
 //  Budget Buddy
 //
 //  Created by Christian Kaden Lim on 21/11/23.
@@ -9,9 +9,10 @@ import SwiftUI
 
 class CurrentTab: ObservableObject {
     @Published var tab = "Home"
+    @Published var updates = false
 }
 
-struct NavigationView: View {
+struct MainView: View {
     
     @EnvironmentObject var currentTab: CurrentTab
     @EnvironmentObject var moneyMatters: MoneyMatters
@@ -89,7 +90,9 @@ struct NavigationView: View {
                     
                     HStack {
                         Button {
-                            currentTab.tab = "Home"
+                            withAnimation(.linear(duration: 0.1)) {
+                                currentTab.tab = "Home"
+                            }
                         } label: {
                             Rectangle().opacity(0)
                         }.frame(width: 50, height: 50).contentShape(Rectangle())
@@ -97,7 +100,9 @@ struct NavigationView: View {
                         Spacer()
                         
                         Button {
-                            currentTab.tab = "Tracking"
+                            withAnimation(.linear(duration: 0.1)) {
+                                currentTab.tab = "Tracking"
+                            }
                         } label: {
                             Rectangle().opacity(0)
                         }.frame(width: 50, height: 50).contentShape(Rectangle())
@@ -105,7 +110,9 @@ struct NavigationView: View {
                         Spacer()
                         
                         Button {
-                            currentTab.tab = "Income"
+                            withAnimation(.linear(duration: 0.1)) {
+                                currentTab.tab = "Income"
+                            }
                         } label: {
                             Rectangle().opacity(0)
                         }.frame(width: 50, height: 50).contentShape(Rectangle())
@@ -113,7 +120,9 @@ struct NavigationView: View {
                         Spacer()
                         
                         Button {
-                            currentTab.tab = "Goals"
+                            withAnimation(.linear(duration: 0.1)) {
+                                currentTab.tab = "Goals"
+                            }
                         } label: {
                             Rectangle().opacity(0)
                         }.frame(width: 50, height: 50).contentShape(Rectangle())
@@ -127,19 +136,19 @@ struct NavigationView: View {
     }
 }
 
-struct NavigationViewMinion: View {
+struct MainViewMinion: View {
     
     @StateObject var currentTab = CurrentTab()
     @StateObject var moneyMatters = MoneyMatters()
     
     var body: some View {
-        NavigationView().environmentObject(currentTab)
+        MainView().environmentObject(currentTab)
             .environmentObject(moneyMatters)
     }
 }
 
 struct NavigationView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationViewMinion()
+        MainViewMinion()
     }
 }

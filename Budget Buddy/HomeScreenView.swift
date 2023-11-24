@@ -16,7 +16,9 @@ class MoneyMatters: ObservableObject {
 
 struct HomeScreenView: View {
     
+    @StateObject var crud = CRUD()
     @EnvironmentObject var moneyMatters: MoneyMatters
+    @EnvironmentObject var currentTab: CurrentTab
     
     @State private var budget = 0.0
     @State private var totalGoals = 0.0
@@ -25,9 +27,35 @@ struct HomeScreenView: View {
     @State private var accomplishedGoals = ""
     @State private var daysToSaveUp = 0
     
+    func pullData() {
+        moneyMatters.spending = []
+        
+        if (crud.names.count != 0) {
+            crud.names.forEach() { i in
+                moneyMatters.spending.append(Spending(name: crud.names[Int(i)!], amount: crud.amounts[Int(i)!], date: crud.dates[Int(i)!]))
+            }
+        }
+        
+        currentTab.updates = true
+    }
+    
+    func pushData() {
+        crud.names = []
+        crud.amounts = []
+        crud.dates = []
+        
+        if (moneyMatters.spending.count != 0) {
+            moneyMatters.spending.forEach() {
+                crud.names.append($0.name)
+                crud.amounts.append($0.amount)
+                crud.dates.append($0.date)
+            }
+        }
+    }
+    
     var body: some View {
         VStack {
-            Text("Budget").font(.custom("Jurassic Park", size: 100)).padding().padding(.top, 50)
+            Text("Budget").font(.custom("White Chalk", size: 100)).foregroundColor(.white).padding().padding(.top, 40)
             
             Spacer()
             
@@ -48,37 +76,13 @@ struct HomeScreenView: View {
             ZStack {
                 Image("Plank").resizable().scaledToFit().padding()
                 
-                Text("You have spent a total of $\(totalSpent, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
+                Text("You have spent a total of $\(totalSpent, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
             }
             
             Spacer()
             
-            ScrollView {
-                ForEach(0..<moneyMatters.spending.count, id: \.self) { i in
-                    ZStack {
-                        Image("Plank").resizable().scaledToFit()
-
-                        HStack {
-                            VStack {
-                                HStack {
-                                    Text("\(moneyMatters.spending[i].name)")
-                                    
-                                    Spacer()
-                                }
-                                
-                                HStack {
-                                    Text("\(moneyMatters.spending[i].date, style: .date)").opacity(0.75).font(.custom("Christmas School", size: 16))
-                                    
-                                    Spacer()
-                                }
-                            }
-                            
-                            Spacer()
-                            
-                            Text("$\(moneyMatters.spending[i].amount, specifier: "%.2f")")
-                        }.font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5)
-                    }.scaleEffect(0.65).padding(-15)
-                }
+            CRUDPanelsView().environmentObject(crud).padding(-15).onChange(of: crud) { _ in
+                pullData()
             }
             
             ZStack {
@@ -90,36 +94,42 @@ struct HomeScreenView: View {
             Spacer()
             
         }.onAppear() {
-            moneyMatters.goals.forEach {
-                if (Int($0.deadline.timeIntervalSince1970) >= Int(Date.now.timeIntervalSince1970)) {
-                    daysToSaveUp = (Int($0.deadline.timeIntervalSince1970) - Int(Date.now.timeIntervalSince1970)) / 86400
-                    
-                    if (daysToSaveUp <= 1) {
-                        totalGoals += $0.amount
-                    } else {
+            crud.target = "Spending"
+            pushData()
+            calculate()
+            
+            func calculate() {
+                totalGoals = 0.0
+                totalIncome = 0.0
+                totalSpent = 0.0
+                
+                moneyMatters.goals.forEach {
+                    if (Int($0.deadline.timeIntervalSince1970) >= Int(Date.now.timeIntervalSince1970)) {
+                        daysToSaveUp = (Int($0.deadline.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970)) / 86400
+                        
                         totalGoals += $0.amount / Double(daysToSaveUp)
                     }
                 }
-            }
-            
-            moneyMatters.spending.forEach {
-                if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) <= 86400) {
-                    totalSpent += $0.amount
+                
+                moneyMatters.spending.forEach {
+                    if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) <= 86400) {
+                        totalSpent += $0.amount
+                    }
                 }
-            }
-            
-            moneyMatters.income.forEach {
-                totalIncome += $0.amount
-            }
-            
-            budget = totalIncome - totalGoals
-            
-            if (totalIncome - totalSpent < totalGoals) {
-                accomplishedGoals = "not "
-            }
-            
-            if (totalIncome - totalSpent == totalGoals) {
-                accomplishedGoals = "barely "
+                
+                moneyMatters.income.forEach {
+                    totalIncome += $0.amount
+                }
+                
+                budget = totalIncome - totalGoals
+                
+                if (totalIncome - totalSpent < totalGoals) {
+                    accomplishedGoals = "not "
+                }
+                
+                if (totalIncome - totalSpent == totalGoals) {
+                    accomplishedGoals = "barely "
+                }
             }
         }
     }
@@ -133,9 +143,9 @@ struct HomeScreenViewMinion: View {
         ZStack {
             HomeScreenView().environmentObject(moneyMatters)
         }.onAppear() {
-            moneyMatters.goals.append(Goal(name: "A Life", amount: 1000000, deadline: Date.now + 30 * 86400))
+            moneyMatters.goals.append(Goal(name: "A Life", amount: 1000000, date: Date.now, deadline: Date.now + 30 * 86400))
             
-            moneyMatters.goals.append(Goal(name: "HotWheels Car", amount: 19.65, deadline: Date.now + 86400))
+            moneyMatters.goals.append(Goal(name: "HotWheels Car", amount: 19.65, date: Date.now, deadline: Date.now + 86400))
         }
     }
 }

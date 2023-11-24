@@ -18,7 +18,7 @@ struct LeafView: View {
             Image("Leaf 2").resizable().rotationEffect(.degrees(leafVar.rotation * 45), anchor: .bottomLeading)
             
             Image("Leaf 3").resizable().rotationEffect(.degrees(leafVar.rotation * 65), anchor: .bottomLeading).offset(x: 100)
-        }.offset(x: -100, y: -400)
+        }.offset(x: -100, y: -400).shadow(radius: 5)
     }
 }
 

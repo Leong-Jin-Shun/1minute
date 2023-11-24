@@ -9,14 +9,42 @@ import SwiftUI
 
 struct IncomeView: View {
     
+    @StateObject var crud = CRUD()
     @EnvironmentObject var moneyMatters: MoneyMatters
+    @EnvironmentObject var currentTab: CurrentTab
     
     @State private var totalIncome = 0.0
+    
+    func pullData() {
+        moneyMatters.income = []
+        
+        if (crud.names.count != 0) {
+            crud.names.forEach() { i in
+                moneyMatters.income.append(Income(name: crud.names[Int(i)!], amount: crud.amounts[Int(i)!], date: crud.dates[Int(i)!], rate: crud.incomeRates[Int(i)!]))
+            }
+        }
+        
+        currentTab.updates = true
+    }
+    
+    func pushData() {
+        crud.names = []
+        crud.amounts = []
+        crud.incomeRates = []
+        
+        if (moneyMatters.income.count != 0) {
+            moneyMatters.income.forEach() {
+                crud.names.append($0.name)
+                crud.amounts.append($0.amount)
+                crud.incomeRates.append($0.rate)
+            }
+        }
+    }
     
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                Text("Income").font(.custom("Jurassic Park", size: 100)).padding().padding(.top, 50)
+                Text("Income").font(.custom("White Chalk", size: 100)).foregroundColor(.white).padding().padding(.top, 40)
                 
                 Spacer()
                 
@@ -36,39 +64,17 @@ struct IncomeView: View {
                 
                 Spacer()
                 
-                ScrollView {
-                    ForEach(0..<moneyMatters.income.count, id: \.self) { i in
-                        ZStack {
-                            Image("Plank").resizable().scaledToFit()
-                            
-                            HStack {
-                                VStack {
-                                    HStack {
-                                        Text("\(moneyMatters.income[i].name)")
-                                        
-                                        Spacer()
-                                    }
-                                    
-                                    if (moneyMatters.income[i].rate == .oneTime) {
-                                        HStack {
-                                            Text("\(moneyMatters.income[i].date, style: .date)").opacity(0.75).font(.custom("Christmas School", size: 16))
-                                            
-                                            Spacer()
-                                        }
-                                    }
-                                }
-                                
-                                Spacer()
-                                
-                                Text("$\(moneyMatters.income[i].amount, specifier: "%.2f")")
-                            }.font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5)
-                        }.scaleEffect(0.65).padding(-15)
-                    }
-                }.offset(y: -75)
+                CRUDPanelsView().environmentObject(crud).padding(.bottom, -75).offset(y: -75).onChange(of: crud) { _ in
+                    pullData()
+                }
                 
                 Spacer()
                 
             }.frame(width: proxy.size.width).onAppear() {
+                crud.target = "Income"
+                pushData()
+                calculate()
+                
                 func getTotalIncome(incomeRate: IncomeRate, amount: Double, date: Date) {
                     switch incomeRate {
                     case .daily:
@@ -90,8 +96,12 @@ struct IncomeView: View {
                     }
                 }
                 
-                moneyMatters.income.forEach {
-                    getTotalIncome(incomeRate: $0.rate, amount: $0.amount, date: $0.date)
+                func calculate() {
+                    totalIncome = 0.0
+                    
+                    moneyMatters.income.forEach {
+                        getTotalIncome(incomeRate: $0.rate, amount: $0.amount, date: $0.date)
+                    }
                 }
             }
         }

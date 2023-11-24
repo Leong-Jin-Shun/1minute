@@ -25,6 +25,12 @@ struct ContentView: View {
     @State private var titleVar = 0.0
     @State private var transparency = 0.0
     
+    func update() {
+        persistentVars.goals = moneyMatters.goals
+        persistentVars.income = moneyMatters.income
+        persistentVars.spending = moneyMatters.spending
+    }
+    
     var body: some View {
         ZStack {
             BackgroundView().environmentObject(leafVar)
@@ -36,9 +42,12 @@ struct ContentView: View {
             }
             
             ZStack {
-                NavigationView().environmentObject(moneyMatters).environmentObject(currentTab).padding()
+                MainView().environmentObject(moneyMatters).environmentObject(currentTab).padding().onChange(of: currentTab.updates) { _ in
+                    currentTab.updates = false
+                    update()
+                }
             }.opacity(transparency)
-        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(Image("Sky").resizable().scaledToFill()).ignoresSafeArea().onAppear() {
+        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(Image("Wooden Texture").renderingMode(.original).resizable().scaledToFill().brightness(0.15).saturation(0.25)).ignoresSafeArea().onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation(.interpolatingSpring(stiffness: 225, damping: 15)) {
                     leafVar.rotation = 1.0
@@ -57,25 +66,15 @@ struct ContentView: View {
                 }
             }
             
+            if (persistentVars.daysLogged.count == 0) {
+                requestAuth()
+            }
+            
             persistentVars.daysLogged.append(DayLog(date: Date.now))
             moneyMatters.goals = persistentVars.goals
             moneyMatters.income = persistentVars.income
             moneyMatters.spending = persistentVars.spending
             moneyMatters.daysLogged = persistentVars.daysLogged
-            
-            moneyMatters.spending.append(Spending(name: "Amogus", amount: 10.95, date: Date.now))
-            
-            moneyMatters.spending.append(Spending(name: "Fortnite Skins", amount: 120.25, date: Date.now))
-            
-            moneyMatters.spending.append(Spending(name: "Scented Candle", amount: 8.00, date: Date.now))
-            
-            moneyMatters.income.append(Income(name: "MacDonald's Salary", amount: 10.00, date: Date.now, rate: IncomeRate.sixWeek))
-            
-            moneyMatters.income.append(Income(name: "Allowance", amount: 2.00, date: Date.now, rate: IncomeRate.daily))
-            
-            moneyMatters.goals.append(Goal(name: "A Cool Million", amount: 1000000.00, deadline: Date.now + 365 * 86400))
-            
-            moneyMatters.goals.append(Goal(name: "HotWheels Car", amount: 19.65, deadline: Date.now + 86400))
         }
     }
 }

@@ -12,5 +12,6 @@ struct Goal: Codable {
     
     var name: String
     var amount: Double
+    var date: Date
     var deadline: Date
 }
