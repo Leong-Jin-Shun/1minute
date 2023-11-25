@@ -36,14 +36,14 @@ struct TrackingView: View {
                         
                         Text("Today").font(.custom("Christmas School", size: 12))
                     }.multilineTextAlignment(.center).offset(x: 115, y: 110)
-                }.padding()
+                }.padding().shadow(color: .white, radius: 5)
                 
                 Spacer()
                 
                 ZStack {
                     Image("Plank").resizable().scaledToFit().padding().opacity(0)
                     
-                    Text("You spent $\(totalSpentToday, specifier: "%.2f") today.\nYou have a streak of \((streak == 1) ? "1 day, welcome back!" : "\(streak) days, well done.")").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
+                    Text("You spent $\(totalSpentToday, specifier: "%.2f") today.\nYou have a streak of \((streak == 1) ? "1 day, welcome back!" : "\(streak) days, well done.")").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5)
                 }
             }.onAppear() {
                 calculate()

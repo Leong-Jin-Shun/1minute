@@ -47,7 +47,7 @@ struct ContentView: View {
                     update()
                 }
             }.opacity(transparency)
-        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(Image("Wooden Texture").renderingMode(.original).resizable().scaledToFill().brightness(0.15).saturation(0.25)).ignoresSafeArea().onAppear() {
+        }.frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 withAnimation(.interpolatingSpring(stiffness: 225, damping: 15)) {
                     leafVar.rotation = 1.0

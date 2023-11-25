@@ -101,11 +101,11 @@ struct HomeScreenView: View {
                 Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.45).shadow(radius: 5).opacity(0)
                 
                 VStack {
-                    Text("You should spend less than").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
+                    Text("You should spend less than").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5)
                     
                     Spacer()
                     
-                    Text("$\(budget, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -32.5)
+                    Text("$\(budget, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -32.5).shadow(color: .white, radius: 3.5)
                     
                     Spacer()
                 }
@@ -114,7 +114,7 @@ struct HomeScreenView: View {
             ZStack {
                 Image("Plank").resizable().scaledToFit().padding().opacity(0)
                 
-                Text("You have spent a total of $\(totalSpent, specifier: "%.2f")  and received a collective income of $\(totalIncome, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
+                Text("You have spent a total of $\(totalSpent, specifier: "%.2f")  and received a collective income of $\(totalIncome, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5)
             }.offset(y: -100)
             
             Spacer()

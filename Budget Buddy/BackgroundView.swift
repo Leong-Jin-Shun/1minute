@@ -43,14 +43,14 @@ struct BackgroundView: View {
                 Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(-5.5 + 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
                 
                 Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(397.5 - 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
-            }.brightness(-0.35).saturation(0)
+            }.brightness(-0.35).saturation(0).shadow(radius: 5)
             
             ZStack {
                 //LeafView().environmentObject(leafVar).rotationEffect(.degrees(90)).position(x: 0, y: 0).scaleEffect(0.3, anchor: .topLeading)
                 
                 //LeafView().environmentObject(leafVar).rotationEffect(.degrees(180)).position(x: 1300, y: 0).scaleEffect(0.3, anchor: .topLeading)
                 
-                LeafView().environmentObject(leafVar).rotationEffect(.degrees(-90)).position(x: 1300, y: 2800).scaleEffect(0.3, anchor: .topLeading)
+                LeafView().environmentObject(leafVar).rotationEffect(.degrees(-90)).position(x: 1300, y: 2800).scaleEffect(0.3, anchor: .topLeading).shadow(radius: 5)
                 
                 //LeafView().environmentObject(leafVar).position(x: 0, y: 2800).scaleEffect(0.3, anchor: .topLeading)
             }
@@ -58,7 +58,7 @@ struct BackgroundView: View {
             Image("Fairy Lights").resizable().scaledToFit().scaleEffect(1.25).position(x: 200, y: -450.0 + 500.0 * leafVar.rotation)
             
             Image("Fairy Lights").resizable().scaledToFit().scaleEffect(x: -1.25, y: 1.25).position(x: 200, y: -85.0 + 250.0 * leafVar.rotation)
-        }
+        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(BrickWallView()).ignoresSafeArea()
     }
 }
 

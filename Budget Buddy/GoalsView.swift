@@ -76,7 +76,7 @@ struct GoalsView: View {
                         Text("$\(dailyGoal, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50))
                         
                         Spacer()
-                    }
+                    }.shadow(color: .white, radius: 3.5)
                 }.padding().offset(y: -62.5)
                 
                 Spacer()
