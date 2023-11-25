@@ -27,8 +27,12 @@ struct BackgroundView: View {
 //                Rectangle().fill(LinearGradient(colors: [Color(.black).opacity(0), Color(.black).opacity(0.75)], startPoint: .top, endPoint: .bottom)).frame(width: 400, height: 300).offset(y: 300)
 //            }.frame(width: 385)
             
+            Image("Chalkboard Texture").resizable().scaledToFit().position(x: 200, y: CGFloat(-100.0 + 100.0 * leafVar.rotation))
+            
             ZStack {
                 Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(10.0 + 20.0 * leafVar.rotation)).scaleEffect(1.0)
+                
+                Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(75.0 + 100.0 * leafVar.rotation)).scaleEffect(1.0)
                 
                 Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(845.0 - 20.0 * leafVar.rotation)).scaleEffect(1.0)
                 
@@ -50,6 +54,10 @@ struct BackgroundView: View {
                 
                 //LeafView().environmentObject(leafVar).position(x: 0, y: 2800).scaleEffect(0.3, anchor: .topLeading)
             }
+            
+            Image("Fairy Lights").resizable().scaledToFit().scaleEffect(1.25).position(x: 200, y: -450.0 + 500.0 * leafVar.rotation)
+            
+            Image("Fairy Lights").resizable().scaledToFit().scaleEffect(x: -1.25, y: 1.25).position(x: 200, y: -85.0 + 250.0 * leafVar.rotation)
         }
     }
 }

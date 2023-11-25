@@ -20,8 +20,8 @@ struct GoalsView: View {
         moneyMatters.goals = []
         
         if (crud.names.count != 0) {
-            crud.names.forEach() { i in
-                moneyMatters.goals.append(Goal(name: crud.names[Int(i)!], amount: crud.amounts[Int(i)!], date: crud.dates[Int(i)!], deadline: crud.deadlines[Int(i)!]))
+            for i in (0...(crud.names.count - 1)) {
+                moneyMatters.goals.append(Goal(name: crud.names[i], amount: crud.amounts[i], date: crud.dates[i], deadline: crud.deadlines[i]))
             }
         }
         
@@ -33,6 +33,7 @@ struct GoalsView: View {
         crud.amounts = []
         crud.dates = []
         crud.deadlines = []
+        crud.incomeRates = []
         
         if (moneyMatters.goals.count != 0) {
             moneyMatters.goals.forEach() {
@@ -40,6 +41,19 @@ struct GoalsView: View {
                 crud.amounts.append($0.amount)
                 crud.dates.append($0.date)
                 crud.deadlines.append($0.deadline)
+                crud.incomeRates.append(IncomeRate.oneTime)
+            }
+        }
+    }
+    
+    func calculate() {
+        dailyGoal = 0.0
+        
+        moneyMatters.goals.forEach {
+            if (Int(Date.now.timeIntervalSince1970) < Int($0.deadline.timeIntervalSince1970)) {
+                timeInterval = Double($0.deadline.timeIntervalSince1970) - Double($0.date.timeIntervalSince1970)
+                
+                dailyGoal += $0.amount * 86400 / timeInterval
             }
         }
     }
@@ -47,19 +61,19 @@ struct GoalsView: View {
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                Text("Goals").font(.custom("White Chalk", size: 100)).foregroundColor(.white).padding().padding(.top, 40)
+                Text("Goals").font(.custom("White Chalk", size: 75)).foregroundColor(.white).padding().padding(.top, 50)
                 
                 Spacer()
                 
                 ZStack {
-                    Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.09).shadow(radius: 5)
+                    Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.09).shadow(radius: 5).opacity(0)
                     
                     VStack {
-                        Text("Every day, you should save up").font(.custom("Christmas School", size: 18)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: 80)
+                        Text("Every day, you should save up").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: 62.5)
                         
                         Spacer()
                         
-                        Text("$\(dailyGoal, specifier: "%.2f")").font(.custom("JungleFever", size: 36))
+                        Text("$\(dailyGoal, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50))
                         
                         Spacer()
                     }
@@ -67,8 +81,12 @@ struct GoalsView: View {
                 
                 Spacer()
                 
-                CRUDPanelsView().environmentObject(crud).padding(.bottom, -75).offset(y: -75).onChange(of: crud) { _ in
-                    pullData()
+                CRUDPanelsView().environmentObject(crud).padding(.bottom, -150).offset(y: -150).onChange(of: crud.needsUpdate) { _ in
+                    if (crud.needsUpdate) {
+                        crud.needsUpdate = false
+                        pullData()
+                        calculate()
+                    }
                 }
                 
                 Spacer()
@@ -77,18 +95,6 @@ struct GoalsView: View {
                 crud.target = "Goal"
                 pushData()
                 calculate()
-                
-                func calculate() {
-                    dailyGoal = 0.0
-                    
-                    moneyMatters.goals.forEach {
-                        if (Int(Date.now.timeIntervalSince1970) < Int($0.deadline.timeIntervalSince1970)) {
-                            timeInterval = Double($0.deadline.timeIntervalSince1970) - Double($0.date.timeIntervalSince1970)
-                            
-                            dailyGoal += $0.amount * 86400 / timeInterval
-                        }
-                    }
-                }
             }
         }
     }
@@ -97,10 +103,11 @@ struct GoalsView: View {
 struct GoalsViewMinion: View {
     
     @StateObject var moneyMatters = MoneyMatters()
+    @StateObject var currentTab = CurrentTab()
     
     var body: some View {
         ZStack {
-            GoalsView().environmentObject(moneyMatters)
+            GoalsView().environmentObject(moneyMatters).environmentObject(currentTab)
         }.onAppear() {
             moneyMatters.goals.append(Goal(name: "A Cool Million", amount: 1000000.00, date: Date.now, deadline: Date.now + 365 * 86400))
             

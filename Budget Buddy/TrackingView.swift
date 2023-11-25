@@ -22,12 +22,12 @@ struct TrackingView: View {
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                Text("Tracking").font(.custom("White Chalk", size: 100)).foregroundColor(.white).padding().padding(.top, 40)
+                Text("Tracking").font(.custom("White Chalk", size: 75)).foregroundColor(.white).padding().padding(.top, 50)
                 
                 Spacer()
                 
                 ZStack {
-                    Image("Rock Plate").resizable().frame(width: 350, height: 400).rotationEffect(.degrees(-90)).shadow(radius: 5)
+                    Image("Rock Plate").resizable().frame(width: 350, height: 400).rotationEffect(.degrees(-90)).shadow(radius: 5).opacity(0)
                     
                     BarChartView(data: barChartValues, colors: [Color(red: 0.335, green: 0.516, blue: 0.116), Color(red: 0.235, green: 0.416, blue: 0.016)]).frame(width: 275, height: 225).offset(y: -25)
                     
@@ -41,7 +41,7 @@ struct TrackingView: View {
                 Spacer()
                 
                 ZStack {
-                    Image("Plank").resizable().scaledToFit().padding()
+                    Image("Plank").resizable().scaledToFit().padding().opacity(0)
                     
                     Text("You spent $\(totalSpentToday, specifier: "%.2f") today.\nYou have a streak of \((streak == 1) ? "1 day, welcome back!" : "\(streak) days, well done.")").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
                 }

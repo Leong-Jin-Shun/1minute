@@ -19,8 +19,8 @@ struct IncomeView: View {
         moneyMatters.income = []
         
         if (crud.names.count != 0) {
-            crud.names.forEach() { i in
-                moneyMatters.income.append(Income(name: crud.names[Int(i)!], amount: crud.amounts[Int(i)!], date: crud.dates[Int(i)!], rate: crud.incomeRates[Int(i)!]))
+            for i in (0...(crud.names.count - 1)) {
+                moneyMatters.income.append(Income(name: crud.names[i], amount: crud.amounts[i], date: crud.dates[i], rate: crud.incomeRates[i]))
             }
         }
         
@@ -30,33 +30,66 @@ struct IncomeView: View {
     func pushData() {
         crud.names = []
         crud.amounts = []
+        crud.dates = []
+        crud.deadlines = []
         crud.incomeRates = []
         
         if (moneyMatters.income.count != 0) {
             moneyMatters.income.forEach() {
                 crud.names.append($0.name)
                 crud.amounts.append($0.amount)
+                crud.dates.append($0.date)
+                crud.deadlines.append($0.date)
                 crud.incomeRates.append($0.rate)
             }
+        }
+    }
+    
+    func getTotalIncome(incomeRate: IncomeRate, amount: Double, date: Date) {
+        switch incomeRate {
+        case .daily:
+            totalIncome += amount
+        case .fiveWeek:
+            totalIncome += amount * 5 / 7
+        case .sixWeek:
+            totalIncome += amount * 6 / 7
+        case .weekly:
+            totalIncome += amount / 7
+        case .monthly:
+            totalIncome += amount / 30
+        case .yearly:
+            totalIncome += amount / 365
+        case .oneTime:
+            if (Calendar.current.isDateInToday(date)) {
+                totalIncome += amount
+            }
+        }
+    }
+    
+    func calculate() {
+        totalIncome = 0.0
+        
+        moneyMatters.income.forEach {
+            getTotalIncome(incomeRate: $0.rate, amount: $0.amount, date: $0.date)
         }
     }
     
     var body: some View {
         GeometryReader { proxy in
             VStack {
-                Text("Income").font(.custom("White Chalk", size: 100)).foregroundColor(.white).padding().padding(.top, 40)
+                Text("Income").font(.custom("White Chalk", size: 75)).foregroundColor(.white).padding().padding(.top, 50)
                 
                 Spacer()
                 
                 ZStack {
-                    Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.09).shadow(radius: 5)
+                    Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.09).shadow(radius: 5).opacity(0)
                     
                     VStack {
-                        Text("You receive a daily income of around").font(.custom("Christmas School", size: 18)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: 80)
+                        Text("You receive a daily income of around").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: 62.5)
                         
                         Spacer()
                         
-                        Text("$\(totalIncome, specifier: "%.2f")").font(.custom("JungleFever", size: 36))
+                        Text("$\(totalIncome, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50))
                         
                         Spacer()
                     }
@@ -64,8 +97,12 @@ struct IncomeView: View {
                 
                 Spacer()
                 
-                CRUDPanelsView().environmentObject(crud).padding(.bottom, -75).offset(y: -75).onChange(of: crud) { _ in
-                    pullData()
+                CRUDPanelsView().environmentObject(crud).padding(.bottom, -150).offset(y: -150).onChange(of: crud.needsUpdate) { _ in
+                    if (crud.needsUpdate) {
+                        crud.needsUpdate = false
+                        pullData()
+                        calculate()
+                    }
                 }
                 
                 Spacer()
@@ -74,35 +111,6 @@ struct IncomeView: View {
                 crud.target = "Income"
                 pushData()
                 calculate()
-                
-                func getTotalIncome(incomeRate: IncomeRate, amount: Double, date: Date) {
-                    switch incomeRate {
-                    case .daily:
-                        totalIncome += amount
-                    case .fiveWeek:
-                        totalIncome += amount * 5 / 7
-                    case .sixWeek:
-                        totalIncome += amount * 6 / 7
-                    case .weekly:
-                        totalIncome += amount / 7
-                    case .monthly:
-                        totalIncome += amount / 30
-                    case .yearly:
-                        totalIncome += amount / 365
-                    case .oneTime:
-                        if (Calendar.current.isDateInToday(date)) {
-                            totalIncome += amount
-                        }
-                    }
-                }
-                
-                func calculate() {
-                    totalIncome = 0.0
-                    
-                    moneyMatters.income.forEach {
-                        getTotalIncome(incomeRate: $0.rate, amount: $0.amount, date: $0.date)
-                    }
-                }
             }
         }
     }
@@ -111,10 +119,11 @@ struct IncomeView: View {
 struct IncomeViewMinion: View {
     
     @StateObject var moneyMatters = MoneyMatters()
+    @StateObject var currentTab = CurrentTab()
     
     var body: some View {
         ZStack {
-            IncomeView().environmentObject(moneyMatters)
+            IncomeView().environmentObject(moneyMatters).environmentObject(currentTab)
         }.onAppear() {
             moneyMatters.income.append(Income(name: "MacDonald's Salary", amount: 10.00, date: Date.now, rate: IncomeRate.sixWeek))
             

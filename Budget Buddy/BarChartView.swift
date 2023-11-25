@@ -34,18 +34,25 @@ struct BarChartView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            HStack(alignment: .bottom, spacing: 4.0) {
-                ForEach(data.indices, id: \.self) { index in
-                    let width = (geometry.size.width / CGFloat(data.count)) - 4.0
-                    let height = geometry.size.height * data[index] / highestData
-                    
-                    ZStack {
+            ZStack {
+                HStack(alignment: .bottom, spacing: 4.0) {
+                    ForEach(data.indices, id: \.self) { index in
+                        let width = (geometry.size.width / CGFloat(data.count)) - 4.0
+                        let height = geometry.size.height * data[index] / highestData
+                        
                         BarView(datum: data[index], colors: colors)
                             .frame(width: width, height: height, alignment: .bottom)
-                        
-                        Text("$\(data[index], specifier: "%.2f")").font(.custom("Christmas School", size: 16)).lineLimit(1).rotationEffect(.degrees(-90)).fixedSize(horizontal: true, vertical: false).padding(-100).offset(x: 75, y: 75)
                     }
                 }
+                
+                ZStack {
+                    ForEach(data.indices, id: \.self) { index in
+                        let width = (geometry.size.width / CGFloat(data.count)) - 4.0
+                        let height = geometry.size.height * data[index] / highestData
+                        
+                        Text("$\(data[index], specifier: "%.2f")").font(.custom("Christmas School", size: 16)).lineLimit(1).fixedSize(horizontal: true, vertical: true).padding(-100).offset(x: -25 + (height / 1.75), y: ((CGFloat(index) + 2.8) * (width + 4.0) - (geometry.size.width / 2)))
+                    }
+                }.padding(0).rotationEffect(.degrees(-90))
             }
         }
     }

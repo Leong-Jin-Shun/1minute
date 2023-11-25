@@ -15,7 +15,8 @@ struct CRUDModifySheet: View {
     @Binding var name: String
     @Binding var amount: Double
     @Binding var date: Date
-    @State var isOneTimeIncome: Bool
+    @Binding var deadline: Date
+    @Binding var incomeRate: IncomeRate
     @Binding var performCRUD: Bool
     
     var body: some View {
@@ -24,10 +25,28 @@ struct CRUDModifySheet: View {
                 VStack {
                     TextField("Provide a description", text: $name)
                     
-                    TextField("Amount of money", value: $amount, format: .currency(code: locale.currency?.identifier ?? "USD"))
+                    TextField("Amount of money", value: $amount, format: .currency(code: locale.currency?.identifier ?? "USD")) .textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.numberPad)
                     
-                    if (type != "Income" || isOneTimeIncome == true) {
-                        DatePicker(type == "Goal" ? "Deadline:" : "Date:", selection: $date, in: Date.now..., displayedComponents: .date)
+                    if (type == "Spending") {
+                        DatePicker("Date:", selection: $date, in: ...Date.now, displayedComponents: .date)
+                            .toggleStyle(.switch)
+                    } else if (type == "Income") {
+                        if (incomeRate == IncomeRate.oneTime) {
+                            DatePicker("Date:", selection: $date, displayedComponents: .date)
+                                .toggleStyle(.switch)
+                        }
+                        
+                        Picker("Select an income rate:", selection: $incomeRate) {
+                            Text("Daily").tag(IncomeRate.daily)
+                            Text("Five days a week").tag(IncomeRate.fiveWeek)
+                            Text("Six days a week").tag(IncomeRate.sixWeek)
+                            Text("Weekly").tag(IncomeRate.weekly)
+                            Text("Monthly").tag(IncomeRate.monthly)
+                            Text("Yearly").tag(IncomeRate.yearly)
+                            Text("One time payment").tag(IncomeRate.oneTime)
+                        }
+                    } else if (type == "Goals") {
+                        DatePicker("Deadline:", selection: $deadline, displayedComponents: .date)
                             .toggleStyle(.switch)
                     }
                     
@@ -43,20 +62,22 @@ struct CRUDModifySheet: View {
 
 struct CRUDModifySheetMinion: View {
     
-    @State private var type = "Goal"
+    @State private var type = "Income"
     @State private var name = "Adolf Hitler"
     @State private var amount = 6.90
     @State private var date = Date.now
+    @State private var deadline = Date.now
+    @State private var incomeRate = IncomeRate.oneTime
     @State private var yes = true
     
     var body: some View {
         VStack {
-            Text(name)
+            Text(type)
             Text(name)
             Text("$\(amount, specifier: "%.2f")")
             Text(date, style: .date)
         }.sheet(isPresented: $yes) {
-            CRUDModifySheet(type: type, name: $name, amount: $amount, date: $date, isOneTimeIncome: false, performCRUD: $yes)
+            CRUDModifySheet(type: type, name: $name, amount: $amount, date: $date, deadline: $deadline, incomeRate: $incomeRate, performCRUD: $yes)
         }
     }
 }

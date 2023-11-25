@@ -32,6 +32,7 @@
 		EDCE07122B10437F003B263D /* CRUDModifySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE07112B10437E003B263D /* CRUDModifySheet.swift */; };
 		EDCE07142B106BCC003B263D /* AniTypewriter.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDCE07132B106BCC003B263D /* AniTypewriter.ttf */; };
 		EDCE07162B106BD6003B263D /* White Chalk.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDCE07152B106BD6003B263D /* White Chalk.ttf */; };
+		EDF5E73F2B11935B00987043 /* CurrencyTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF5E73E2B11935B00987043 /* CurrencyTextFieldView.swift */; };
 		EDF667552B0CA1B5001ABD3F /* Jurassic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */; };
 		EDF667572B0CA4EF001ABD3F /* ScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */; };
 		EDF6675B2B0CAC14001ABD3F /* Christmas School.otf in Resources */ = {isa = PBXBuildFile; fileRef = EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */; };
@@ -86,6 +87,7 @@
 		EDCE07112B10437E003B263D /* CRUDModifySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDModifySheet.swift; sourceTree = "<group>"; };
 		EDCE07132B106BCC003B263D /* AniTypewriter.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AniTypewriter.ttf; sourceTree = "<group>"; };
 		EDCE07152B106BD6003B263D /* White Chalk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "White Chalk.ttf"; sourceTree = "<group>"; };
+		EDF5E73E2B11935B00987043 /* CurrencyTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextFieldView.swift; sourceTree = "<group>"; };
 		EDF667542B0CA1B5001ABD3F /* Jurassic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Jurassic.ttf; path = ../Jurassic.ttf; sourceTree = "<group>"; };
 		EDF667582B0CA50F001ABD3F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		EDF6675A2B0CAC14001ABD3F /* Christmas School.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Christmas School.otf"; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				ED9AFAF32B0A00B100CD38C3 /* BackgroundView.swift */,
 				EDCE070F2B0F40E9003B263D /* CRUDPanelsView.swift */,
 				EDCE07112B10437E003B263D /* CRUDModifySheet.swift */,
+				EDF5E73E2B11935B00987043 /* CurrencyTextFieldView.swift */,
 				ED9AFB022B0B048F00CD38C3 /* ScreenView.swift */,
 				ED1D686B2B08612C00FD825A /* LeafView.swift */,
 				ED1D68412B08546400FD825A /* Assets.xcassets */,
@@ -345,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDCE070A2B0EF383003B263D /* IncomeView.swift in Sources */,
+				EDF5E73F2B11935B00987043 /* CurrencyTextFieldView.swift in Sources */,
 				D95B97662B0C4D9300137B90 /* Income.swift in Sources */,
 				ED9AFAF42B0A00B100CD38C3 /* BackgroundView.swift in Sources */,
 				EDCE07122B10437F003B263D /* CRUDModifySheet.swift in Sources */,

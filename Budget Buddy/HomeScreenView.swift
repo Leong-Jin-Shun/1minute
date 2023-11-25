@@ -31,8 +31,8 @@ struct HomeScreenView: View {
         moneyMatters.spending = []
         
         if (crud.names.count != 0) {
-            crud.names.forEach() { i in
-                moneyMatters.spending.append(Spending(name: crud.names[Int(i)!], amount: crud.amounts[Int(i)!], date: crud.dates[Int(i)!]))
+            for i in (0...(crud.names.count - 1)) {
+                moneyMatters.spending.append(Spending(name: crud.names[i], amount: crud.amounts[i], date: crud.dates[i]))
             }
         }
         
@@ -43,52 +43,88 @@ struct HomeScreenView: View {
         crud.names = []
         crud.amounts = []
         crud.dates = []
+        crud.deadlines = []
+        crud.incomeRates = []
         
         if (moneyMatters.spending.count != 0) {
             moneyMatters.spending.forEach() {
                 crud.names.append($0.name)
                 crud.amounts.append($0.amount)
                 crud.dates.append($0.date)
+                crud.deadlines.append($0.date)
+                crud.incomeRates.append(IncomeRate.oneTime)
             }
+        }
+    }
+    
+    func calculate() {
+        totalGoals = 0.0
+        totalIncome = 0.0
+        totalSpent = 0.0
+        
+        moneyMatters.goals.forEach {
+            if (Int($0.deadline.timeIntervalSince1970) >= Int(Date.now.timeIntervalSince1970)) {
+                daysToSaveUp = (Int($0.deadline.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970)) / 86400
+                
+                totalGoals += $0.amount / Double(daysToSaveUp)
+            }
+        }
+        
+        moneyMatters.spending.forEach {
+            if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) <= 86400) {
+                totalSpent += $0.amount
+            }
+        }
+        
+        moneyMatters.income.forEach {
+            totalIncome += $0.amount
+        }
+        
+        budget = totalIncome - totalGoals
+        
+        if (totalIncome - totalSpent < totalGoals) {
+            accomplishedGoals = "not "
+        }
+        
+        if (totalIncome - totalSpent == totalGoals) {
+            accomplishedGoals = "barely "
         }
     }
     
     var body: some View {
         VStack {
-            Text("Budget").font(.custom("White Chalk", size: 100)).foregroundColor(.white).padding().padding(.top, 40)
+            Text("Budget").font(.custom("White Chalk", size: 75)).foregroundColor(.white).padding().padding(.top, 50)
             
             Spacer()
             
             ZStack {
-                Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.45).shadow(radius: 5)
+                Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.45).shadow(radius: 5).opacity(0)
                 
                 VStack {
-                    Text("You should spend less than").font(.custom("Christmas School", size: 18)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: 10)
+                    Text("You should spend less than").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
                     
                     Spacer()
                     
-                    Text("$\(budget, specifier: "%.2f")").font(.custom("JungleFever", size: 36))
+                    Text("$\(budget, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -32.5)
                     
                     Spacer()
                 }
             }.padding()
             
             ZStack {
-                Image("Plank").resizable().scaledToFit().padding()
+                Image("Plank").resizable().scaledToFit().padding().opacity(0)
                 
-                Text("You have spent a total of $\(totalSpent, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
-            }
+                Text("You have spent a total of $\(totalSpent, specifier: "%.2f")  and received a collective income of $\(totalIncome, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
+            }.offset(y: -100)
             
             Spacer()
             
-            CRUDPanelsView().environmentObject(crud).padding(-15).onChange(of: crud) { _ in
-                pullData()
-            }
-            
-            ZStack {
-                Image("Plank").resizable().scaledToFit().padding()
-                
-                Text("You have received a total of $\(totalIncome, specifier: "%.2f") from your collective income today.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
+            CRUDPanelsView().environmentObject(crud).padding(-15).offset(y: -100).padding(.bottom, -100).onChange(of: crud.needsUpdate) { _ in
+                if (crud.needsUpdate) {
+                    crud.needsUpdate = false
+                    pullData()
+                    calculate()
+                }
             }
             
             Spacer()
@@ -97,40 +133,6 @@ struct HomeScreenView: View {
             crud.target = "Spending"
             pushData()
             calculate()
-            
-            func calculate() {
-                totalGoals = 0.0
-                totalIncome = 0.0
-                totalSpent = 0.0
-                
-                moneyMatters.goals.forEach {
-                    if (Int($0.deadline.timeIntervalSince1970) >= Int(Date.now.timeIntervalSince1970)) {
-                        daysToSaveUp = (Int($0.deadline.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970)) / 86400
-                        
-                        totalGoals += $0.amount / Double(daysToSaveUp)
-                    }
-                }
-                
-                moneyMatters.spending.forEach {
-                    if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) <= 86400) {
-                        totalSpent += $0.amount
-                    }
-                }
-                
-                moneyMatters.income.forEach {
-                    totalIncome += $0.amount
-                }
-                
-                budget = totalIncome - totalGoals
-                
-                if (totalIncome - totalSpent < totalGoals) {
-                    accomplishedGoals = "not "
-                }
-                
-                if (totalIncome - totalSpent == totalGoals) {
-                    accomplishedGoals = "barely "
-                }
-            }
         }
     }
 }
@@ -138,10 +140,11 @@ struct HomeScreenView: View {
 struct HomeScreenViewMinion: View {
     
     @StateObject var moneyMatters = MoneyMatters()
+    @StateObject var currentTab = CurrentTab()
     
     var body: some View {
         ZStack {
-            HomeScreenView().environmentObject(moneyMatters)
+            HomeScreenView().environmentObject(moneyMatters).environmentObject(currentTab)
         }.onAppear() {
             moneyMatters.goals.append(Goal(name: "A Life", amount: 1000000, date: Date.now, deadline: Date.now + 30 * 86400))
             

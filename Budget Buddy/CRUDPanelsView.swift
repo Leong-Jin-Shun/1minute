@@ -14,6 +14,7 @@ class CRUD: ObservableObject, Equatable {
     @Published var dates = [] as [Date]
     @Published var deadlines = [] as [Date]
     @Published var incomeRates = [] as [IncomeRate]
+    @Published var needsUpdate = false
     
     static func ==(lhs: CRUD, rhs: CRUD) -> Bool {
         return lhs.names == rhs.names && lhs.amounts == rhs.amounts && lhs.dates == rhs.dates
@@ -25,7 +26,6 @@ struct CRUDPanelsView: View {
     @EnvironmentObject var crud: CRUD
     @State private var selectedPanel: Int?
     @State private var performCRUD = false
-    @State private var isOneTimeIncome = false
     @State private var buttonOpacity = 0.0
     
     var body: some View {
@@ -39,6 +39,8 @@ struct CRUDPanelsView: View {
                     crud.names.insert("", at: 0)
                     crud.amounts.insert(0.0, at: 0)
                     crud.dates.insert(Date.now, at: 0)
+                    crud.deadlines.insert(Date.now, at: 0)
+                    crud.incomeRates.insert(IncomeRate.oneTime, at: 0)
                     selectedPanel = 0
                     performCRUD = true
                 }
@@ -47,7 +49,7 @@ struct CRUDPanelsView: View {
             ScrollView {
                 ForEach(0..<crud.names.count, id: \.self) { i in
                     ZStack {
-                        Image("Plank").resizable().scaledToFit()
+                        Image("The Cooler Plank").resizable().scaleEffect(x: 1, y: 0.75).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
 
                         Rectangle().opacity(0).contentShape(Rectangle()).onTapGesture() {
                             if (!performCRUD) {
@@ -63,30 +65,26 @@ struct CRUDPanelsView: View {
                             VStack {
                                 HStack {
                                     Text("\(crud.names[i])")
-
+                                    
                                     Spacer()
                                 }
-
-
+                                
+                                
                                 HStack {
                                     if (crud.target == "Goal") {
                                         Text("Pay by \(crud.deadlines[i], style: .date)")
                                     } else {
                                         Text("\(crud.dates[i], style: .date)")
                                     }
-
+                                    
                                     Spacer()
                                 }.opacity(0.75).font(.custom("Christmas School", size: 18))
                             }
-
+                            
                             Spacer()
-
-                            if (selectedPanel == nil) {
-                                Text("$\(crud.amounts[i], specifier: "%.2f")")
-                            } else if (selectedPanel != i) {
-                                Text("$\(crud.amounts[i], specifier: "%.2f")")
-                            }
-                        }.font(.custom("Christmas School", size: 24)).frame(width: 300).lineSpacing(1.5)
+                            
+                            Text("$\(crud.amounts[i], specifier: "%.2f")").opacity(selectedPanel == i ? 0 : 1)
+                        }.font(.custom("Christmas School", size: 24)).frame(width: 375).lineSpacing(1.5)
 
                         if (selectedPanel == i) {
                             HStack {
@@ -107,9 +105,10 @@ struct CRUDPanelsView: View {
                                         crud.names.remove(at: i)
                                         crud.amounts.remove(at: i)
                                         crud.dates.remove(at: i)
+                                        crud.needsUpdate = true
                                     }
                                 }
-                            }.padding(30)
+                            }.offset(x: 1.5).padding(30)
                         }
 
                         ZStack {
@@ -121,9 +120,10 @@ struct CRUDPanelsView: View {
                                     crud.amounts.swapAt(i, i - 1)
                                     crud.dates.swapAt(i, i - 1)
                                     selectedPanel = nil
+                                    crud.needsUpdate = true
                                 }
                             }
-                        }.offset(x: 165, y: -35)
+                        }.offset(x: 180, y: -35)
 
                         ZStack {
                             Image(systemName: "chevron.down")
@@ -134,17 +134,20 @@ struct CRUDPanelsView: View {
                                     crud.amounts.swapAt(i, i + 1)
                                     crud.dates.swapAt(i, i + 1)
                                     selectedPanel = nil
+                                    crud.needsUpdate = true
                                 }
                             }
-                        }.offset(x: 165, y: 35)
-                    }.scaleEffect(0.65).padding(-15)
+                        }.offset(x: 180, y: 35)
+                    }.scaleEffect(0.65).padding(-30)
                 }
             }
         }.sheet(isPresented: $performCRUD) {
             if (selectedPanel != nil) {
-                CRUDModifySheet(type: crud.target, name: $crud.names[selectedPanel!], amount: $crud.amounts[selectedPanel!], date: $crud.dates[selectedPanel!], isOneTimeIncome: isOneTimeIncome, performCRUD: $performCRUD)
+                CRUDModifySheet(type: crud.target, name: $crud.names[selectedPanel!], amount: $crud.amounts[selectedPanel!], date: $crud.dates[selectedPanel!], deadline: $crud.deadlines[selectedPanel!], incomeRate: $crud.incomeRates[selectedPanel!], performCRUD: $performCRUD)
                 
             }
+        }.onChange(of: performCRUD) { _ in
+            crud.needsUpdate = true
         }
     }
 }
@@ -167,6 +170,7 @@ struct CRUDPanelsViewMinion: View {
             crud.deadlines.append(Date.now)
             crud.deadlines.append(Date.now)
             crud.deadlines.append(Date.now)
+            crud.target = "Spending"
         }
     }
 }
