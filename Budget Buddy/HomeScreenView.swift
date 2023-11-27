@@ -92,47 +92,49 @@ struct HomeScreenView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("Budget").font(.custom("White Chalk", size: 75)).foregroundColor(.white).padding().padding(.top, 50)
-            
-            Spacer()
-            
-            ZStack {
-                Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.45).shadow(radius: 5).opacity(0)
+        GeometryReader { proxy in
+            VStack {
+                Text("Budget").font(.custom("White Chalk", size: 75)).foregroundColor(.white).padding().padding(.top, 50)
                 
-                VStack {
-                    Text("You should spend less than").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5)
-                    
-                    Spacer()
-                    
-                    Text("$\(budget, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -32.5).shadow(color: .white, radius: 3.5)
-                    
-                    Spacer()
-                }
-            }.padding()
-            
-            ZStack {
-                Image("Plank").resizable().scaledToFit().padding().opacity(0)
+                Spacer()
                 
-                Text("You have spent a total of $\(totalSpent, specifier: "%.2f")  and received a collective income of $\(totalIncome, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5)
-            }.offset(y: -100)
-            
-            Spacer()
-            
-            CRUDPanelsView().environmentObject(crud).padding(-15).offset(y: -100).padding(.bottom, -100).onChange(of: crud.needsUpdate) { _ in
-                if (crud.needsUpdate) {
-                    crud.needsUpdate = false
-                    pullData()
-                    calculate()
+                ZStack {
+                    Image("The Cooler Plank").resizable().frame(width: 350, height: 75).offset(y: -21.5).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
+                    
+                    VStack {
+                        Text("You should spend less than").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5).offset(y: 1)
+                        
+                        Spacer()
+                        
+                        Text("$\(budget, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -31.5)
+                        
+                        Spacer()
+                    }
+                }.padding()
+                
+                ZStack {
+                    Image("Plank").resizable().scaledToFit().padding().opacity(0)
+                    
+                    Text("You have spent a total of $\(totalSpent, specifier: "%.2f")  and received a collective income of $\(totalIncome, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5).padding()
+                }.offset(y: -100)
+                
+                Spacer()
+                
+                CRUDPanelsView().environmentObject(crud).padding(-15).offset(y: -100).padding(.bottom, -100).onChange(of: crud.needsUpdate) { _ in
+                    if (crud.needsUpdate) {
+                        crud.needsUpdate = false
+                        pullData()
+                        calculate()
+                    }
                 }
+                
+                Spacer()
+                
+            }.frame(width: proxy.size.width).onAppear() {
+                crud.target = "Spending"
+                pushData()
+                calculate()
             }
-            
-            Spacer()
-            
-        }.onAppear() {
-            crud.target = "Spending"
-            pushData()
-            calculate()
         }
     }
 }

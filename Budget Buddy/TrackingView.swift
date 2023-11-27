@@ -17,7 +17,7 @@ struct TrackingView: View {
     @State private var currentDayIndex = 1
     @State private var barChartValues = [] as [Double]
     @State private var streak = 1
-    @State private var daysViewed = 7
+    @State private var daysViewing = 7
     
     var body: some View {
         GeometryReader { proxy in
@@ -27,7 +27,7 @@ struct TrackingView: View {
                 Spacer()
                 
                 ZStack {
-                    Image("Rock Plate").resizable().frame(width: 350, height: 400).rotationEffect(.degrees(-90)).shadow(radius: 5).opacity(0)
+                    Image("The Cooler Plank").resizable().frame(width: 350, height: 300).shadow(radius: 5).offset(y: -10).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
                     
                     BarChartView(data: barChartValues, colors: [Color(red: 0.335, green: 0.516, blue: 0.116), Color(red: 0.235, green: 0.416, blue: 0.016)]).frame(width: 275, height: 225).offset(y: -25)
                     
@@ -36,14 +36,14 @@ struct TrackingView: View {
                         
                         Text("Today").font(.custom("Christmas School", size: 12))
                     }.multilineTextAlignment(.center).offset(x: 115, y: 110)
-                }.padding().shadow(color: .white, radius: 5)
+                }.padding()
                 
                 Spacer()
                 
                 ZStack {
-                    Image("Plank").resizable().scaledToFit().padding().opacity(0)
+                    Image("The Cooler Plank").resizable().frame(width: 350, height: 75).shadow(radius: 5).brightness(0.2).saturation(0.75)
                     
-                    Text("You spent $\(totalSpentToday, specifier: "%.2f") today.\nYou have a streak of \((streak == 1) ? "1 day, welcome back!" : "\(streak) days, well done.")").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5)
+                    Text("You spent $\(totalSpentToday, specifier: "%.2f") today.\nYou have a streak of \((streak == 1) ? "1 day, welcome back!" : "\(streak) days, well done.")").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center)
                 }
             }.onAppear() {
                 calculate()
@@ -65,10 +65,16 @@ struct TrackingView: View {
                         currentDayIndex = 0
                         barChartValues.append(0.0)
                         rawSpendingValues.forEach {
-                            if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) <= daysViewed * 86400) {
-                                if (Int(Date.now.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970) >= currentDayIndex * 86400) {
-                                    currentDayIndex += 1
-                                    barChartValues.append(0.0)
+                            let timeDifference = Int(Calendar.current.dateComponents([.day], from: Date.now).day ?? 0) - Int(Calendar.current.dateComponents([.day], from: $0.date).day ?? 0)
+                            
+                            if (timeDifference < daysViewing) {
+                                if (timeDifference >= currentDayIndex) {
+                                    for _ in (1...daysViewing) {
+                                        if (timeDifference >= currentDayIndex) {
+                                            currentDayIndex += 1
+                                            barChartValues.append(0.0)
+                                        }
+                                    }
                                 }
                                 
                                 barChartValues[currentDayIndex] += $0.amount
@@ -77,8 +83,10 @@ struct TrackingView: View {
                         
                         barChartValues.remove(at: 0)
                         
-                        for _ in (1...(daysViewed - currentDayIndex)) {
-                            barChartValues.append(0.0)
+                        if (daysViewing > currentDayIndex) {
+                            for _ in (1...(daysViewing - currentDayIndex)) {
+                                barChartValues.append(0.0)
+                            }
                         }
                         
                         totalSpentToday = barChartValues[0]
@@ -87,7 +95,7 @@ struct TrackingView: View {
                         currentDayIndex = 1
                         for i in (0...(moneyMatters.daysLogged.count - 1)) {
                             if (currentDayIndex != 1000000000000) {
-                                if (Int(Date.now.timeIntervalSince1970) - Int(moneyMatters.daysLogged[i].date.timeIntervalSince1970) > (currentDayIndex + 1) *  86400) {
+                                if (Int(Calendar.current.dateComponents([.day], from: Date.now).day ?? 0) - Int(Calendar.current.dateComponents([.day], from: moneyMatters.daysLogged[i].date).day ?? 0) > (currentDayIndex + 1)) {
                                     currentDayIndex = 1000000000000
                                 } else if (Calendar.current.isDate(moneyMatters.daysLogged[i].date, inSameDayAs: Date(timeIntervalSince1970: TimeInterval(Int(Date.now.timeIntervalSince1970) - (currentDayIndex * 86400))))) {
                                     streak += 1
@@ -122,6 +130,10 @@ struct TrackingViewMinion: View {
             moneyMatters.spending.append(Spending(name: "Fortnite Skins", amount: 35, date: Date.now - 172801))
             
             moneyMatters.spending.append(Spending(name: "Scented Candle", amount: 69, date: Date.now - 259201))
+            
+            moneyMatters.spending.append(Spending(name: "Scented Candle", amount: 69, date: Date.now - 5 * 86500))
+            
+            moneyMatters.spending.append(Spending(name: "Scented Candle", amount: 69, date: Date.now - 6 * 86500))
             
             moneyMatters.daysLogged.append(DayLog(date: Date.now - 86500))
             

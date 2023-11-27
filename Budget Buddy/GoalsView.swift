@@ -66,17 +66,17 @@ struct GoalsView: View {
                 Spacer()
                 
                 ZStack {
-                    Image("Rock Plate").resizable().scaledToFit().scaleEffect(1.09).shadow(radius: 5).opacity(0)
+                    Image("The Cooler Plank").resizable().frame(width: 350, height: 75).offset(y: 10).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
                     
                     VStack {
-                        Text("Every day, you should save up").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: 62.5)
+                        Text("Every day, you should save up").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: 62.5).shadow(color: .white, radius: 3.5)
                         
                         Spacer()
                         
                         Text("$\(dailyGoal, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50))
                         
                         Spacer()
-                    }.shadow(color: .white, radius: 3.5)
+                    }
                 }.padding().offset(y: -62.5)
                 
                 Spacer()

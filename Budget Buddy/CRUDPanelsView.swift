@@ -37,7 +37,7 @@ struct CRUDPanelsView: View {
                 
                 Circle().frame(width: 50).opacity(buttonOpacity).contentShape(Circle()).onTapGesture() {
                     crud.names.insert("", at: 0)
-                    crud.amounts.insert(0.0, at: 0)
+                    crud.amounts.insert(10, at: 0)
                     crud.dates.insert(Date.now, at: 0)
                     crud.deadlines.insert(Date.now, at: 0)
                     crud.incomeRates.insert(IncomeRate.oneTime, at: 0)

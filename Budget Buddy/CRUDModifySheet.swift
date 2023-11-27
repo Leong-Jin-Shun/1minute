@@ -45,8 +45,8 @@ struct CRUDModifySheet: View {
                             Text("Yearly").tag(IncomeRate.yearly)
                             Text("One time payment").tag(IncomeRate.oneTime)
                         }
-                    } else if (type == "Goals") {
-                        DatePicker("Deadline:", selection: $deadline, displayedComponents: .date)
+                    } else if (type == "Goal") {
+                        DatePicker("Deadline:", selection: $deadline, in: Date.now..., displayedComponents: .date)
                             .toggleStyle(.switch)
                     }
                     
