@@ -25,7 +25,7 @@ struct CRUDModifySheet: View {
                 VStack {
                     TextField("Provide a description", text: $name)
                     
-                    TextField("Amount of money", value: $amount, format: .currency(code: locale.currency?.identifier ?? "USD")) .textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.numberPad)
+                    TextField("Amount of money", value: $amount, format: .currency(code: locale.currency?.identifier ?? "USD")) .textFieldStyle(RoundedBorderTextFieldStyle()).keyboardType(.numberPad).font(.custom("AniTypewriter", size: 18))
                     
                     if (type == "Spending") {
                         DatePicker("Date:", selection: $date, in: ...Date.now, displayedComponents: .date)
@@ -52,8 +52,8 @@ struct CRUDModifySheet: View {
                     
                     Button("Done") {
                         performCRUD = false
-                    }.buttonStyle(.borderedProminent)
-                }
+                    }.buttonStyle(.borderedProminent).tint(Color(red: 0.235, green: 0.416, blue: 0.016))
+                }.font(.custom("Christmas School", size: 18))
             }
             .navigationBarTitle("Modify This \(type)")
         }

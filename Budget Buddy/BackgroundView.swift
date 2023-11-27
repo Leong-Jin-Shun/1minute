@@ -58,7 +58,7 @@ struct BackgroundView: View {
             Image("Fairy Lights").resizable().scaledToFit().scaleEffect(1.25).position(x: 200, y: -450.0 + 500.0 * leafVar.rotation)
             
             Image("Fairy Lights").resizable().scaledToFit().scaleEffect(x: -1.25, y: 1.25).position(x: 200, y: -85.0 + 250.0 * leafVar.rotation)
-        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(BrickWallView()).ignoresSafeArea()
+        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(BrickWallView().brightness(0.25).saturation(0.75)).ignoresSafeArea()
     }
 }
 

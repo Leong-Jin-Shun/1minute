@@ -10,7 +10,7 @@ import SwiftUI
 struct BrickWallView: View {
     var body: some View {
         ZStack {
-            Image("Brick Wall").renderingMode(.original).resizable().scaledToFill().saturation(0.35).brightness(0.2)
+            Image("Brick Wall").renderingMode(.original).resizable().scaledToFill().saturation(0.35).brightness(0.1)
             
             ZStack {
                 Image("Sky").resizable().scaledToFit()
@@ -21,7 +21,7 @@ struct BrickWallView: View {
                 
                 Image("Mural 3").offset(x: -75, y: 250).shadow(radius: 15)
                 
-                Image("Brick Wall").renderingMode(.original).resizable().scaledToFill().saturation(0.35).brightness(0.2).opacity(0.15)
+                Image("Brick Wall").renderingMode(.original).resizable().scaledToFill().saturation(0.35).brightness(0.1).opacity(0.15)
             }.brightness(-0.15).frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().mask(
                 ZStack {
                     Image("Brick Wall Mask").renderingMode(.original).resizable().scaledToFill()
