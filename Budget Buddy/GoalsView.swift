@@ -66,22 +66,22 @@ struct GoalsView: View {
                 Spacer()
                 
                 ZStack {
-                    Image("The Cooler Plank").resizable().frame(width: 350, height: 75).offset(y: 10).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
+                    Image("The Cooler Plank").resizable().frame(width: 350, height: 75).offset(y: -(proxy.size.height / 13.5)).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
                     
                     VStack {
-                        Text("Every day, you should save up").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: 62.5).shadow(color: .white, radius: 3.5)
+                        Text("Every day, you should save up").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).offset(y: -(proxy.size.height / 13.5) + 55).shadow(color: .white, radius: 3.5)
                         
                         Spacer()
                         
-                        Text("$\(dailyGoal, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50))
+                        Text("$\(dailyGoal, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -(proxy.size.height / 11.5))
                         
                         Spacer()
                     }
-                }.padding().offset(y: -62.5)
+                }.padding()
                 
                 Spacer()
                 
-                CRUDPanelsView().environmentObject(crud).padding(.bottom, -150).offset(y: -150).onChange(of: crud.needsUpdate) { _ in
+                CRUDPanelsView().environmentObject(crud).padding(.bottom, proxy.size.height / -6 - 25).offset(y: proxy.size.height / -6 - 25).onChange(of: crud.needsUpdate) { _ in
                     if (crud.needsUpdate) {
                         crud.needsUpdate = false
                         pullData()
@@ -91,7 +91,7 @@ struct GoalsView: View {
                 
                 Spacer()
                 
-            }.frame(width: proxy.size.width).onAppear() {
+            }.frame(width: proxy.size.width, height: proxy.size.height).onAppear() {
                 crud.target = "Goal"
                 pushData()
                 calculate()

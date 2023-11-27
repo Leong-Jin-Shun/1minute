@@ -149,7 +149,7 @@ struct TrackingView: View {
                         }
                     }
                 }
-            }.frame(width: proxy.size.width)
+            }.frame(width: proxy.size.width, height: proxy.size.height)
         }
     }
 }

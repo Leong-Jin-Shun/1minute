@@ -121,28 +121,26 @@ struct HomeScreenView: View {
                 Spacer()
                 
                 ZStack {
-                    Image("The Cooler Plank").resizable().frame(width: 350, height: 75).offset(y: -20).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
+                    Image("The Cooler Plank").resizable().frame(width: 350, height: proxy.size.height * 0.1).offset(y: proxy.size.height * -0.035 + 5).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
                     
                     VStack {
                         Text("You should spend less than").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5).offset(y: 2.5)
                         
                         Spacer()
                         
-                        Text("$\(budget, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -30)
+                        Text("$\(budget, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -(proxy.size.height / 8.5) + 55)
                         
                         Spacer()
                     }
                 }.padding()
                 
                 ZStack {
-                    Image("Plank").resizable().scaledToFit().padding().opacity(0)
-                    
                     Text("You have spent a total of $\(totalSpent, specifier: "%.2f") and received a collective income of $\(totalIncome, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5).padding()
-                }.offset(y: -100)
+                }.offset(y: -(proxy.size.height / 6) + 25)
                 
                 Spacer()
                 
-                CRUDPanelsView().environmentObject(crud).padding(-15).offset(y: -100).padding(.bottom, -100).onChange(of: crud.needsUpdate) { _ in
+                CRUDPanelsView().environmentObject(crud).padding(-15).position(x: proxy.size.width / 2, y: 50).padding(.bottom, -100).onChange(of: crud.needsUpdate) { _ in
                     if (crud.needsUpdate) {
                         crud.needsUpdate = false
                         pullData()
@@ -152,7 +150,7 @@ struct HomeScreenView: View {
                 
                 Spacer()
                 
-            }.frame(width: proxy.size.width).onAppear() {
+            }.frame(width: proxy.size.width, height: proxy.size.height).onAppear() {
                 crud.target = "Spending"
                 pushData()
                 calculate()

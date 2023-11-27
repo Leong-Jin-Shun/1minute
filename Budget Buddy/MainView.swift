@@ -18,120 +18,122 @@ struct MainView: View {
     @EnvironmentObject var moneyMatters: MoneyMatters
     
     var body: some View {
-        VStack {
-            Spacer()
-            
-            ZStack {
-                if (currentTab.tab == "Home") {
-                    HomeScreenView().environmentObject(moneyMatters)
-                } else if (currentTab.tab == "Tracking") {
-                    TrackingView().environmentObject(moneyMatters)
-                } else if (currentTab.tab == "Income") {
-                    IncomeView().environmentObject(moneyMatters)
-                } else if (currentTab.tab == "Goals") {
-                    GoalsView().environmentObject(moneyMatters)
-                }
-            }
-            
-            Spacer()
-            
-            HStack {
-                Spacer()
+        GeometryReader { proxy in
+            VStack {
                 Spacer()
                 
                 ZStack {
-                    HStack {
-                        ZStack {
-                            ScreenView().frame(width: 50, height: 50)
-                            
-                            if (currentTab.tab == "Home") {
-                                Image(systemName: "house.fill").scaleEffect(1.5).foregroundStyle(.green)
-                            } else {
-                                Image(systemName: "house.fill").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        ZStack {
-                            ScreenView().frame(width: 50, height: 50)
-                            
-                            if (currentTab.tab == "Tracking") {
-                                Image(systemName: "antenna.radiowaves.left.and.right").scaleEffect(1.5).foregroundStyle(.green)
-                            } else {
-                                Image(systemName: "antenna.radiowaves.left.and.right").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        ZStack {
-                            ScreenView().frame(width: 50, height: 50)
-                            
-                            if (currentTab.tab == "Income") {
-                                Image(systemName: "briefcase.fill").scaleEffect(1.5).foregroundStyle(.green)
-                            } else {
-                                Image(systemName: "briefcase.fill").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        ZStack {
-                            ScreenView().frame(width: 50, height: 50)
-                            
-                            if (currentTab.tab == "Goals") {
-                                Image(systemName: "mappin.and.ellipse").scaleEffect(1.5).foregroundStyle(.green)
-                            } else {
-                                Image(systemName: "mappin.and.ellipse").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
-                            }
-                        }
+                    if (currentTab.tab == "Home") {
+                        HomeScreenView().environmentObject(moneyMatters)
+                    } else if (currentTab.tab == "Tracking") {
+                        TrackingView().environmentObject(moneyMatters)
+                    } else if (currentTab.tab == "Income") {
+                        IncomeView().environmentObject(moneyMatters)
+                    } else if (currentTab.tab == "Goals") {
+                        GoalsView().environmentObject(moneyMatters)
                     }
-                    
-                    HStack {
-                        Button {
-                            withAnimation(.linear(duration: 0.1)) {
-                                currentTab.tab = "Home"
-                            }
-                        } label: {
-                            Rectangle().opacity(0)
-                        }.frame(width: 50, height: 50).contentShape(Rectangle())
-                        
-                        Spacer()
-                        
-                        Button {
-                            withAnimation(.linear(duration: 0.1)) {
-                                currentTab.tab = "Tracking"
-                            }
-                        } label: {
-                            Rectangle().opacity(0)
-                        }.frame(width: 50, height: 50).contentShape(Rectangle())
-                        
-                        Spacer()
-                        
-                        Button {
-                            withAnimation(.linear(duration: 0.1)) {
-                                currentTab.tab = "Income"
-                            }
-                        } label: {
-                            Rectangle().opacity(0)
-                        }.frame(width: 50, height: 50).contentShape(Rectangle())
-                        
-                        Spacer()
-                        
-                        Button {
-                            withAnimation(.linear(duration: 0.1)) {
-                                currentTab.tab = "Goals"
-                            }
-                        } label: {
-                            Rectangle().opacity(0)
-                        }.frame(width: 50, height: 50).contentShape(Rectangle())
-                    }
-                }.padding().padding(.bottom, -5)
+                }
                 
                 Spacer()
-                Spacer()
-            }
+                
+                HStack {
+                    Spacer()
+                    Spacer()
+                    
+                    ZStack {
+                        HStack {
+                            ZStack {
+                                ScreenView().frame(width: 50, height: 50)
+                                
+                                if (currentTab.tab == "Home") {
+                                    Image(systemName: "house.fill").scaleEffect(1.5).foregroundStyle(.green)
+                                } else {
+                                    Image(systemName: "house.fill").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack {
+                                ScreenView().frame(width: 50, height: 50)
+                                
+                                if (currentTab.tab == "Tracking") {
+                                    Image(systemName: "antenna.radiowaves.left.and.right").scaleEffect(1.5).foregroundStyle(.green)
+                                } else {
+                                    Image(systemName: "antenna.radiowaves.left.and.right").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack {
+                                ScreenView().frame(width: 50, height: 50)
+                                
+                                if (currentTab.tab == "Income") {
+                                    Image(systemName: "briefcase.fill").scaleEffect(1.5).foregroundStyle(.green)
+                                } else {
+                                    Image(systemName: "briefcase.fill").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack {
+                                ScreenView().frame(width: 50, height: 50)
+                                
+                                if (currentTab.tab == "Goals") {
+                                    Image(systemName: "mappin.and.ellipse").scaleEffect(1.5).foregroundStyle(.green)
+                                } else {
+                                    Image(systemName: "mappin.and.ellipse").scaleEffect(1.5).foregroundStyle(Color(red: 0.335, green: 0.516, blue: 0.116))
+                                }
+                            }
+                        }
+                        
+                        HStack {
+                            Button {
+                                withAnimation(.linear(duration: 0.1)) {
+                                    currentTab.tab = "Home"
+                                }
+                            } label: {
+                                Rectangle().opacity(0)
+                            }.frame(width: 50, height: 50).contentShape(Rectangle())
+                            
+                            Spacer()
+                            
+                            Button {
+                                withAnimation(.linear(duration: 0.1)) {
+                                    currentTab.tab = "Tracking"
+                                }
+                            } label: {
+                                Rectangle().opacity(0)
+                            }.frame(width: 50, height: 50).contentShape(Rectangle())
+                            
+                            Spacer()
+                            
+                            Button {
+                                withAnimation(.linear(duration: 0.1)) {
+                                    currentTab.tab = "Income"
+                                }
+                            } label: {
+                                Rectangle().opacity(0)
+                            }.frame(width: 50, height: 50).contentShape(Rectangle())
+                            
+                            Spacer()
+                            
+                            Button {
+                                withAnimation(.linear(duration: 0.1)) {
+                                    currentTab.tab = "Goals"
+                                }
+                            } label: {
+                                Rectangle().opacity(0)
+                            }.frame(width: 50, height: 50).contentShape(Rectangle())
+                        }
+                    }.padding().padding(.bottom, -5)
+                    
+                    Spacer()
+                    Spacer()
+                }
+            }.frame(width: proxy.size.width, height: proxy.size.height)
         }
     }
 }

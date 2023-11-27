@@ -16,49 +16,51 @@ struct BackgroundView: View {
     @EnvironmentObject var leafVar: LeafVar
     
     var body: some View {
-        ZStack {
-//            ZStack {
-//                Image("Mountains").scaleEffect(2).offset(y: 50).brightness(0.25)
-//
-//                Rectangle().fill(LinearGradient(colors: [Color(.black).opacity(0), .white], startPoint: .top, endPoint: .bottom)).frame(width: 400, height: 200).offset(y: 125)
-//
-//                Image("Jungle Trees").scaleEffect(2).offset(y: 225).brightness(-0.15)
-//
-//                Rectangle().fill(LinearGradient(colors: [Color(.black).opacity(0), Color(.black).opacity(0.75)], startPoint: .top, endPoint: .bottom)).frame(width: 400, height: 300).offset(y: 300)
-//            }.frame(width: 385)
-            
-            Image("Chalkboard Texture").resizable().scaledToFit().position(x: 200, y: CGFloat(-100.0 + 100.0 * leafVar.rotation))
-            
+        GeometryReader { proxy in
             ZStack {
-                Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(10.0 + 20.0 * leafVar.rotation)).scaleEffect(1.0)
+                //            ZStack {
+                //                Image("Mountains").scaleEffect(2).offset(y: 50).brightness(0.25)
+                //
+                //                Rectangle().fill(LinearGradient(colors: [Color(.black).opacity(0), .white], startPoint: .top, endPoint: .bottom)).frame(width: 400, height: 200).offset(y: 125)
+                //
+                //                Image("Jungle Trees").scaleEffect(2).offset(y: 225).brightness(-0.15)
+                //
+                //                Rectangle().fill(LinearGradient(colors: [Color(.black).opacity(0), Color(.black).opacity(0.75)], startPoint: .top, endPoint: .bottom)).frame(width: 400, height: 300).offset(y: 300)
+                //            }.frame(width: 385)
                 
-                Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(75.0 + 100.0 * leafVar.rotation)).scaleEffect(1.0)
+                Image("Chalkboard Texture").resizable().scaledToFit().position(x: 200, y: CGFloat(-100.0 + 100.0 * leafVar.rotation))
                 
-                Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(845.0 - 20.0 * leafVar.rotation)).scaleEffect(1.0)
+                ZStack {
+                    Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(10.0 + 20.0 * leafVar.rotation)).scaleEffect(1.0)
+                    
+                    Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(75.0 + 100.0 * leafVar.rotation)).scaleEffect(1.0)
+                    
+                    Image("Wooden Pole").rotationEffect(.degrees(45)).position(x: 200, y: CGFloat(proxy.size.height - 5.5 - 20.0 * leafVar.rotation)).scaleEffect(1.0)
+                    
+                    Image("Wooden Pole").rotationEffect(.degrees(-45)).position(x: CGFloat(-5.5 + 10.0 * leafVar.rotation), y: 200).scaleEffect(1.0)
+                    
+                    Image("Wooden Pole").rotationEffect(.degrees(-45)).position(x: CGFloat(proxy.size.width + 5.5 - 10.0 * leafVar.rotation), y: 200).scaleEffect(1.0)
+                    
+                    Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(-5.5 + 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
+                    
+                    Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(proxy.size.width + 5.5 - 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
+                }.brightness(-0.35).saturation(0).shadow(radius: 5)
                 
-                Image("Wooden Pole").rotationEffect(.degrees(-45)).position(x: CGFloat(-5.5 + 10.0 * leafVar.rotation), y: 200).scaleEffect(1.0)
+                ZStack {
+                    //LeafView().environmentObject(leafVar).rotationEffect(.degrees(90)).position(x: 0, y: 0).scaleEffect(0.3, anchor: .topLeading)
+                    
+                    //LeafView().environmentObject(leafVar).rotationEffect(.degrees(180)).position(x: 1300, y: 0).scaleEffect(0.3, anchor: .topLeading)
+                    
+                    LeafView().environmentObject(leafVar).rotationEffect(.degrees(-90)).scaleEffect(0.3, anchor: .topLeading).offset(x: proxy.size.width - 75, y: proxy.size.height - 115).shadow(radius: 5)
+                    
+                    //LeafView().environmentObject(leafVar).position(x: 0, y: 2800).scaleEffect(0.3, anchor: .topLeading)
+                }
                 
-                Image("Wooden Pole").rotationEffect(.degrees(-45)).position(x: CGFloat(397.5 - 10.0 * leafVar.rotation), y: 200).scaleEffect(1.0)
+                Image("Fairy Lights").resizable().scaledToFit().scaleEffect(1.25).position(x: 200, y: -450.0 + 500.0 * leafVar.rotation)
                 
-                Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(-5.5 + 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
-                
-                Image("Wooden Pole").rotationEffect(.degrees(-44.5)).position(x: CGFloat(397.5 - 10.0 * leafVar.rotation), y: 600).scaleEffect(1.0)
-            }.brightness(-0.35).saturation(0).shadow(radius: 5)
-            
-            ZStack {
-                //LeafView().environmentObject(leafVar).rotationEffect(.degrees(90)).position(x: 0, y: 0).scaleEffect(0.3, anchor: .topLeading)
-                
-                //LeafView().environmentObject(leafVar).rotationEffect(.degrees(180)).position(x: 1300, y: 0).scaleEffect(0.3, anchor: .topLeading)
-                
-                LeafView().environmentObject(leafVar).rotationEffect(.degrees(-90)).position(x: 1300, y: 2800).scaleEffect(0.3, anchor: .topLeading).shadow(radius: 5)
-                
-                //LeafView().environmentObject(leafVar).position(x: 0, y: 2800).scaleEffect(0.3, anchor: .topLeading)
-            }
-            
-            Image("Fairy Lights").resizable().scaledToFit().scaleEffect(1.25).position(x: 200, y: -450.0 + 500.0 * leafVar.rotation)
-            
-            Image("Fairy Lights").resizable().scaledToFit().scaleEffect(x: -1.25, y: 1.25).position(x: 200, y: -85.0 + 250.0 * leafVar.rotation)
-        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(BrickWallView().brightness(0.25).saturation(0.75)).ignoresSafeArea()
+                Image("Fairy Lights").resizable().scaledToFit().scaleEffect(x: -1.25, y: 1.25).position(x: 200, y: -85.0 + 250.0 * leafVar.rotation)
+            }.frame(maxWidth: .infinity, maxHeight: .infinity).background(BrickWallView(height: proxy.size.height).brightness(0.25).saturation(0.75)).ignoresSafeArea()
+        }
     }
 }
 
