@@ -13,13 +13,13 @@ struct BrickWallView: View {
             Image("Brick Wall").renderingMode(.original).resizable().scaledToFill().saturation(0.35).brightness(0.2)
             
             ZStack {
-                Rectangle().fill(.black)
+                Image("Sky").resizable().scaledToFit()
                 
-                Image("Mural 1").rotationEffect(.degrees(30)).offset(x: -150, y: -150)
+                Image("Mural 1").rotationEffect(.degrees(30)).offset(x: -100, y: -150).shadow(radius: 15)
                 
-                Image("Mural 2").rotationEffect(.degrees(-10)).offset(x: 25, y: 50)
+                Image("Mural 2").rotationEffect(.degrees(-10)).offset(x: 100, y: 50).shadow(radius: 15)
                 
-                Image("Mural 3").offset(x: -125, y: 250)
+                Image("Mural 3").offset(x: -75, y: 250).shadow(radius: 15)
                 
                 Image("Brick Wall").renderingMode(.original).resizable().scaledToFill().saturation(0.35).brightness(0.2).opacity(0.15)
             }.brightness(-0.15).frame(maxWidth: .infinity, maxHeight: .infinity).ignoresSafeArea().mask(

@@ -105,6 +105,8 @@ struct CRUDPanelsView: View {
                                         crud.names.remove(at: i)
                                         crud.amounts.remove(at: i)
                                         crud.dates.remove(at: i)
+                                        crud.deadlines.remove(at: i)
+                                        crud.incomeRates.remove(at: i)
                                         crud.needsUpdate = true
                                     }
                                 }

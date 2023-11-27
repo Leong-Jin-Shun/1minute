@@ -57,6 +57,27 @@ struct HomeScreenView: View {
         }
     }
     
+    func getTotalIncome(incomeRate: IncomeRate, amount: Double, date: Date) {
+        switch incomeRate {
+        case .daily:
+            totalIncome += amount
+        case .fiveWeek:
+            totalIncome += amount * 5 / 7
+        case .sixWeek:
+            totalIncome += amount * 6 / 7
+        case .weekly:
+            totalIncome += amount / 7
+        case .monthly:
+            totalIncome += amount / 30
+        case .yearly:
+            totalIncome += amount / 365
+        case .oneTime:
+            if (Calendar.current.isDateInToday(date)) {
+                totalIncome += amount
+            }
+        }
+    }
+    
     func calculate() {
         totalGoals = 0.0
         totalIncome = 0.0
@@ -77,7 +98,7 @@ struct HomeScreenView: View {
         }
         
         moneyMatters.income.forEach {
-            totalIncome += $0.amount
+            getTotalIncome(incomeRate: $0.rate, amount: $0.amount, date: $0.date)
         }
         
         budget = totalIncome - totalGoals
@@ -99,14 +120,14 @@ struct HomeScreenView: View {
                 Spacer()
                 
                 ZStack {
-                    Image("The Cooler Plank").resizable().frame(width: 350, height: 75).offset(y: -21.5).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
+                    Image("The Cooler Plank").resizable().frame(width: 350, height: 75).offset(y: -20).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
                     
                     VStack {
-                        Text("You should spend less than").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5).offset(y: 1)
+                        Text("You should spend less than").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5).offset(y: 2.5)
                         
                         Spacer()
                         
-                        Text("$\(budget, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -31.5)
+                        Text("$\(budget, specifier: "%.2f")").font(.custom("AniTypewriter", size: 50)).offset(y: -30)
                         
                         Spacer()
                     }
@@ -115,7 +136,7 @@ struct HomeScreenView: View {
                 ZStack {
                     Image("Plank").resizable().scaledToFit().padding().opacity(0)
                     
-                    Text("You have spent a total of $\(totalSpent, specifier: "%.2f")  and received a collective income of $\(totalIncome, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5).padding()
+                    Text("You have spent a total of $\(totalSpent, specifier: "%.2f") and received a collective income of $\(totalIncome, specifier: "%.2f") today. You can \(accomplishedGoals)buy the items you have planned for eventually.").font(.custom("Christmas School", size: 20)).frame(width: 300).lineSpacing(1.5).multilineTextAlignment(.center).shadow(color: .white, radius: 3.5).padding()
                 }.offset(y: -100)
                 
                 Spacer()
