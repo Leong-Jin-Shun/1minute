@@ -12,6 +12,7 @@ class MoneyMatters: ObservableObject {
     @Published var income = [] as [Income]
     @Published var spending = [] as [Spending]
     @Published var daysLogged = [] as [DayLog]
+    @Published var budget = 0.0
 }
 
 struct HomeScreenView: View {

@@ -36,9 +36,9 @@ struct ContentView: View {
             BackgroundView().environmentObject(leafVar)
             
             if (transparency != 1.0) {
-                Image("Rock Plate").resizable().scaledToFit().offset(y: CGFloat(-185 * titleVar)).scaleEffect(1.0 - 0.125 * titleVar).shadow(radius: 5)
+                //Image("Rock Plate").resizable().scaledToFit().offset(y: CGFloat(-185 * titleVar)).scaleEffect(1.0 - 0.125 * titleVar).shadow(radius: 5)
                 
-                TitleView().offset(y: CGFloat(-187.5 * titleVar)).scaleEffect(1.0 - 0.1 * titleVar).opacity(1.0 - titleVar)
+                TitleView().scaleEffect(1.0 - 0.5 * titleVar).offset(y: CGFloat(-600 * titleVar))
             }
             
             ZStack {

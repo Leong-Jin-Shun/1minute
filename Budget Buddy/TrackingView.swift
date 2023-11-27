@@ -18,6 +18,49 @@ struct TrackingView: View {
     @State private var barChartValues = [] as [Double]
     @State private var streak = 1
     @State private var daysViewing = 7
+    @State private var totalIncome = 0.0
+    @State private var totalGoals = 0.0
+    @State private var budget = 0.0
+    
+    func getTotalIncome(incomeRate: IncomeRate, amount: Double, date: Date) {
+        switch incomeRate {
+        case .daily:
+            totalIncome += amount
+        case .fiveWeek:
+            totalIncome += amount * 5 / 7
+        case .sixWeek:
+            totalIncome += amount * 6 / 7
+        case .weekly:
+            totalIncome += amount / 7
+        case .monthly:
+            totalIncome += amount / 30
+        case .yearly:
+            totalIncome += amount / 365
+        case .oneTime:
+            if (Calendar.current.isDateInToday(date)) {
+                totalIncome += amount
+            }
+        }
+    }
+    
+    func calculate2() {
+        totalGoals = 0.0
+        totalIncome = 0.0
+        
+        moneyMatters.goals.forEach {
+            if (Int($0.deadline.timeIntervalSince1970) >= Int(Date.now.timeIntervalSince1970)) {
+                let daysToSaveUp = (Int($0.deadline.timeIntervalSince1970) - Int($0.date.timeIntervalSince1970)) / 86400
+                
+                totalGoals += $0.amount / Double(daysToSaveUp)
+            }
+        }
+        
+        moneyMatters.income.forEach {
+            getTotalIncome(incomeRate: $0.rate, amount: $0.amount, date: $0.date)
+        }
+        
+        budget = totalIncome - totalGoals
+    }
     
     var body: some View {
         GeometryReader { proxy in
@@ -29,7 +72,7 @@ struct TrackingView: View {
                 ZStack {
                     Image("The Cooler Plank").resizable().frame(width: 350, height: 300).shadow(radius: 5).offset(y: -10).brightness(0.2).saturation(0.75).shadow(radius: 5, x: 2.5, y: 5)
                     
-                    BarChartView(data: barChartValues, colors: [Color(red: 0.335, green: 0.516, blue: 0.116), Color(red: 0.235, green: 0.416, blue: 0.016)]).frame(width: 275, height: 225).offset(y: -25)
+                    BarChartView(data: barChartValues, colors: [Color(red: 0.335, green: 0.516, blue: 0.116), Color(red: 0.235, green: 0.416, blue: 0.016)], line: budget).frame(width: 275, height: 225).offset(y: -25)
                     
                     VStack {
                         Text("^").font(.custom("Christmas School", size: 24)).offset(y: 5)
@@ -47,6 +90,7 @@ struct TrackingView: View {
                 }
             }.onAppear() {
                 calculate()
+                calculate2()
                 
                 func calculate() {
                     rawSpendingValues = []
@@ -140,6 +184,12 @@ struct TrackingViewMinion: View {
             moneyMatters.daysLogged.append(DayLog(date: Date.now - 2 * 86500))
             
             moneyMatters.daysLogged.append(DayLog(date: Date.now - 3 * 86500))
+            
+            moneyMatters.goals.append(Goal(name: "", amount: 10.0, date: Date.now, deadline: Date.now + 86400))
+            
+            moneyMatters.goals.append(Goal(name: "", amount: 50.0, date: Date.now, deadline: Date.now + 86400))
+            
+            moneyMatters.income.append(Income(name: "", amount: 100.0, date: Date.now, rate: IncomeRate.daily))
         }
     }
 }
